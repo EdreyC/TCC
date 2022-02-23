@@ -1,0 +1,22 @@
+.button{
+    display: flex;
+    align-items: center;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 15px 10px 15px;
+    background-color: #8d8d8d;
+    color: #f0f8ff;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    border: none;
+    gap: 3.5px;
+    min-width: 70%;
+    outline: none;
+    justify-content: center;
+    
+    &:hover{
+        cursor: pointer;
+        background-color: #727272;
+    }
+}
