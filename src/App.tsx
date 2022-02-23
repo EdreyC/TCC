@@ -4,8 +4,10 @@ import Button from './components/Button/Button'
 import {BiLock} from 'react-icons/bi'
 import {MdOutlineMail} from 'react-icons/md'
 import {FiEye} from 'react-icons/fi'
+import {FiEyeOff} from 'react-icons/fi'
 function App() {
-  
+  const [pass,setPass] = useState(false);
+
   return (
     <div className="page-signin">
       <div className='title-signin'>
@@ -18,23 +20,30 @@ function App() {
         <span>Login in to your account existent of TCC</span>
         <div className='form-signin'>
 
-        <div className='input-email'><MdOutlineMail 
+        <div className='input-email'>
+          <MdOutlineMail 
           size={22}
           color='#363636' />
-          <input type="text" placeholder='Digite seu email' /></div>
-          <div className='input-password'><BiLock 
+          <input type='text' placeholder='Digite seu email' />
+        </div>
+
+          <div className='input-password'>
+            <BiLock 
           size={22}
           color='#363636' />
-          <input type="text" placeholder='Digite sua senha' />
-          <button>
-          <FiEye size={22}
-          color='#363636'/>
+          <input type={pass? "text": 'password'}  placeholder='Digite sua senha' />
+          <button onClick={()=>setPass(pass? false: true)}>
+            {pass? (<FiEye size={22}
+          color='#363636'/>):(<FiEyeOff size={22}
+            color='#363636'/>)}
+          
           </button>
    
           </div>
          
 
           <Button>Sign In</Button>
+
           <div>
             <div></div>
             <div></div>
@@ -42,7 +51,7 @@ function App() {
           </div>
         </div>
 
-        <a href="">Don't have an account? Sign Up</a>
+        <a href="#">Don't have an account? Sign Up</a>
       </div>
 
     </div>

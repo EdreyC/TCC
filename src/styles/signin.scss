@@ -46,6 +46,7 @@
             gap: 1rem;
             margin-top: 2%;
             .input-password{
+                
                 display: flex;
                 padding: 0.6rem;
                 border:2px solid #666666;
@@ -69,6 +70,8 @@
                 }
             }
             .input-email{
+            width: 90%;
+
                 display: flex;
                 padding: 0.7rem;
                 border:2px solid #666666;
