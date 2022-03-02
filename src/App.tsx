@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import './styles/signin.scss'
 import Button from './components/Button/Button'
-import {BiLock} from 'react-icons/bi'
-import {MdOutlineMail} from 'react-icons/md'
-import {FiEye} from 'react-icons/fi'
-import {FiEyeOff} from 'react-icons/fi'
+import { BiLock } from 'react-icons/bi'
+import { MdOutlineMail } from 'react-icons/md'
+import { FiEye } from 'react-icons/fi'
+import { FiEyeOff } from 'react-icons/fi'
 function App() {
-  const [pass,setPass] = useState(false);
+  const [pass, setPass] = useState(false);
 
   return (
     <div className="page-signin">
@@ -17,30 +17,31 @@ function App() {
 
       <div className='box-signin'>
         <h1>Welcome Back</h1>
-        <span>Login in to your account existent of TCC</span>
+        <span>Login in to your account existent of AGILIZE.IT</span>
         <div className='form-signin'>
 
-        <div className='input-email'>
-          <MdOutlineMail 
-          size={22}
-          color='#363636' />
-          <input type='text' placeholder='Digite seu email' />
-        </div>
+          <div className='input-email'>
+            <MdOutlineMail
+              size={22}
+              color='#363636' />
+            <input type='text' placeholder='Type your email' />
+          </div>
 
           <div className='input-password'>
-            <BiLock 
-          size={22}
-          color='#363636' />
-          <input type={pass? "text": 'password'}  placeholder='Digite sua senha' />
-          <button onClick={()=>setPass(pass? false: true)}>
-            {pass? (<FiEye size={22}
-          color='#363636'/>):(<FiEyeOff size={22}
-            color='#363636'/>)}
-          
-          </button>
-   
+            <BiLock
+              size={22}
+              color='#363636' />
+            <input type={pass ? "text" : 'password'} placeholder='Type your password' />
+            <button onClick={() => setPass(pass ? false : true)}>
+              {pass ? (<FiEye size={22}
+                color='#363636'
+                />) : (<FiEyeOff size={22}
+                  color='#363636' />)}
+
+            </button>
+
           </div>
-         
+
 
           <Button>Sign In</Button>
 
