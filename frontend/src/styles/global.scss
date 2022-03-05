@@ -1,5 +1,15 @@
 h1,p,span,a,button{
     font-family: 'Inter';
+    
 }
+a{
+    color: #7862FF;
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+
+}
+
 html,body{
 }
