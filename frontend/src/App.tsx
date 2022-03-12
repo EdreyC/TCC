@@ -1,16 +1,14 @@
-import { Link, Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import Sigin from "./pages/Signin"
-import Signup from "./pages/Signup"
-
+import { BrowserRouter as Router } from "react-router-dom"
+import { AuthContextProvider } from "./context/AuthContext"
+import MainRoutes from "../routes"
 
 function App() {
   return(
-    <Routes>
-      <Route path="/signin" element={<Sigin />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/" element={<Home />} />
-    </Routes>
+    <Router>
+      <AuthContextProvider>
+        <MainRoutes/>
+      </AuthContextProvider>
+    </Router>
   )
 }
 

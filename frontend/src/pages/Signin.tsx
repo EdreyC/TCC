@@ -8,11 +8,22 @@ import { FiEyeOff } from 'react-icons/fi'
 import { BsGoogle } from 'react-icons/bs'
 import "react-bootstrap"
 import { Link } from 'react-router-dom'
-import { signInWithGoogle } from '../services/Auth'
-export default function Sigin() {
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../hooks/useAuth";
 
+
+
+export default function Sigin() {
+  const {user,signInWithGoogle} = useAuth()
   const [pass, setPass] = useState(false);
-  
+  const navigate = useNavigate();
+  async function SignInWithGoogle(){
+
+    if(!user){
+        await signInWithGoogle();
+    }
+    navigate("/")
+}
   return (
     <div className="page-signin ">
       <div className='title-signin'>
