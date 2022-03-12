@@ -8,13 +8,11 @@ import { FiEyeOff } from 'react-icons/fi'
 import { BsGoogle } from 'react-icons/bs'
 import "react-bootstrap"
 import { Link } from 'react-router-dom'
-
-
-
+import { signInWithGoogle } from '../services/Auth'
 export default function Sigin() {
 
   const [pass, setPass] = useState(false);
-
+  
   return (
     <div className="page-signin ">
       <div className='title-signin'>
@@ -52,7 +50,9 @@ export default function Sigin() {
 
           <div className='wrapper-signinbuttons'>
             <Button>Sign In</Button>
-            <Button style={{ background: "#db3236", display: 'flex', gap: "10px" }}><BsGoogle />Sign in with google </Button>
+            <Button
+            onClick={signInWithGoogle}
+             style={{ background: "#db3236", display: 'flex', gap: "10px" }}><BsGoogle />Sign in with google </Button>
           </div>
         </div>
 
