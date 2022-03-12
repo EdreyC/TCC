@@ -14,7 +14,12 @@ import { useAuth } from "../hooks/useAuth";
 
 
 export default function Sigin() {
+
+  
   const {user,signInWithGoogle} = useAuth()
+
+
+
   const [pass, setPass] = useState(false);
   const navigate = useNavigate();
   async function SignInWithGoogle(){
@@ -62,7 +67,7 @@ export default function Sigin() {
           <div className='wrapper-signinbuttons'>
             <Button>Sign In</Button>
             <Button
-            onClick={signInWithGoogle}
+            onClick={SignInWithGoogle}
              style={{ background: "#db3236", display: 'flex', gap: "10px" }}><BsGoogle />Sign in with google </Button>
           </div>
         </div>
