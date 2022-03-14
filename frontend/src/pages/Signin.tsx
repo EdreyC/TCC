@@ -10,7 +10,6 @@ import "react-bootstrap"
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth";
-import { getAuth, signOut } from 'firebase/auth'
 
 
 
@@ -20,7 +19,9 @@ export default function Sigin() {
   const navigate = useNavigate();
   const { user, signInWithGoogle } = useAuth()
 
-  const auth = getAuth();
+      if(user){
+        navigate("/")
+      }
 
 
   async function SignInWithGoogle() {
@@ -30,6 +31,7 @@ export default function Sigin() {
     }
     navigate("/")
   }
+
   return (
     <div className="page-signin ">
       <div className='title-signin'>
