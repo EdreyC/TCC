@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../styles/signin.scss'
 import Button from '../components/Button/Button'
 import { BiLock } from 'react-icons/bi'
@@ -10,25 +10,26 @@ import "react-bootstrap"
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth";
+import { getAuth, signOut } from 'firebase/auth'
 
 
 
 export default function Sigin() {
 
-  
-  const {user,signInWithGoogle} = useAuth()
-
-
-
   const [pass, setPass] = useState(false);
   const navigate = useNavigate();
-  async function SignInWithGoogle(){
+  const { user, signInWithGoogle } = useAuth()
 
-    if(!user){
-        await signInWithGoogle();
+  const auth = getAuth();
+
+
+  async function SignInWithGoogle() {
+
+    if (!user) {
+      await signInWithGoogle();
     }
     navigate("/")
-}
+  }
   return (
     <div className="page-signin ">
       <div className='title-signin'>
@@ -40,7 +41,7 @@ export default function Sigin() {
 
         <h1>Welcome Back</h1>
         <span>Login in to your account existent of AGILIZE.IT</span>
-        
+
         <div className='form-signin'>
 
           <div className='input-email'>
@@ -67,8 +68,8 @@ export default function Sigin() {
           <div className='wrapper-signinbuttons'>
             <Button>Sign In</Button>
             <Button
-            onClick={SignInWithGoogle}
-             style={{ background: "#db3236", display: 'flex', gap: "10px" }}><BsGoogle />Sign in with google </Button>
+              onClick={SignInWithGoogle}
+              style={{ background: "#db3236", display: 'flex', gap: "10px" }}><BsGoogle />Sign in with google </Button>
           </div>
         </div>
 
