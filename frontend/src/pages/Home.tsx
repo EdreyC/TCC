@@ -2,7 +2,6 @@ import { signOut } from "firebase/auth";
 import { useEffect } from "react";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../components/Button/Button";
 import { useAuth } from "../hooks/useAuth";
 import { auth } from "../services/firebase";
 
