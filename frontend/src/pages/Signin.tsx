@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth";
 
 
-
 export default function Sigin() {
 
   const [pass, setPass] = useState(false);
@@ -34,11 +33,11 @@ export default function Sigin() {
   return (
     <Container className="pt-signin">
       <Row className="align-items-center justify-content-around">
-        <Col lg="6" className='title-signin p-5'>
+        <Col lg="6" className='order-2 order-lg-1 title-signin p-5'>
           <h1>Lorem ipsum</h1>
           <p className="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only.</p>
         </Col>
-        <Col lg="4" className="container-signin bg-light p-4 rounded">
+        <Col lg="4" className="order-1 order-lg-2 container-signin bg-light p-4 rounded">
           <h1 className="mb-2">Welcome Back</h1>
           <span className="text-muted">Login in to your account existent of AGILIZE.IT</span>
           <div className="form-signin my-3">
@@ -57,7 +56,7 @@ export default function Sigin() {
             </div>
             <div className='wrapper-signinbuttons d-flex'>
               <Button>Sign In</Button>
-              <Button style={{ background: "#db3236", display: 'flex', gap: "10px" }}><BsGoogle />Sign in with google </Button>
+              <Button style={{ background: "#db3236", display: 'flex', gap: "10px" }} onClick={SignInWithGoogle}><BsGoogle />Sign in with google </Button>
             </div>
 
             <span>Don't have an account? <Link to="/signup">Sign Up</Link> </span>
