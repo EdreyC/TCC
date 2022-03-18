@@ -1,16 +1,20 @@
-import { ChakraProvider } from "@chakra-ui/react"
-import { Link, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import PrivateRoute from "./components/PrivateRoute"
 import Home from "./pages/Home"
-import Sigin from "./pages/Signin"
+import Signin from "./pages/Signin"
 import Signup from "./pages/Signup"
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  return(
+  return (
     <Routes>
-      <Route path="/signin" element={<Sigin />} />
+      <Route path="/signin" element={<Signin />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/" element={<Home />} />
+      <Route element={<PrivateRoute />}>
+        <Route path="/" element={<Home />} />
+      </Route>
+      <Route path="*" element={<h1>404</h1>} />
     </Routes>
   )
 }
