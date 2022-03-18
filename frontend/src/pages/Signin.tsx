@@ -10,7 +10,7 @@ import "react-bootstrap"
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth";
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
 export default function Sigin() {
@@ -22,8 +22,8 @@ export default function Sigin() {
       if(user){
         navigate("/")
       }
-
-
+    
+ 
   async function SignInWithGoogle() {
 
     if (!user) {
