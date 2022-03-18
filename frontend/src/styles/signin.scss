@@ -1,116 +1,60 @@
-.page-signin{
-    
-    display: flex;
-    align-items: center;
-    height: 98vh;
-
     .title-signin{
-        display: flex;
-        flex-direction: column;
-        max-width: 35%;
-        margin: 0px 15% 0px 134px;
-            p{
-            color: #666666;
-        }
         h1{
             margin-bottom: 10px;
             font-size:80px ;
         }
     }
     .container-signin{
-
-        display: flex;
+        -top: 400px;
+        text-align: center;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
-        background-color: #f8f8f8;
-        padding: 3% 5% 3% 5%;
-        border-radius: 1rem;
-        margin-right: 2%;
-        gap: 15px;
-
-        >h1{
+        h1{
             font-size: 40px;
             margin-bottom: -5px;
         }
-        >span{
+        span{
             font-size: 16px;
             font-weight: 400;
-            color: #4D4D4D;
         }
         .form-signin{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 2%;
-            
+            input{
+                font-size: 14.5px;
+                margin-left: 0.5rem;
+                font-family: 'Inter';
+                background:none;
+                outline: none;
+                border: none;   
+                color: #666666;     
+            }
             .input-password{
-                
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
-                width: 90%;
                 padding: 0.7rem;
                 border:2px solid #666666;
                 border-radius: 0.25rem;
-
-                >input{
-                    font-size: 14.5px;
-                
-                    margin-left: 0.5rem;
-                    font-family: 'Inter';
-                    background:none;
-                    outline: none;
-                    border: none;   
-                    color: #666666;     
-
-                }
                 >button{
                     display: flex;
-                    
                     border: none;
                     outline: none;
                     background: none;
                     cursor: pointer;
                     color:#363636;
-                    
                     &:hover{
-
                         color: #6250d3;
                     }
-                   
                 }
-              
             }
             .input-email{
-
-                display: flex;
-                width: 90%;
                 padding: 0.7rem;
                 border:2px solid #666666;
                 border-radius: 0.25rem;
-                >input{
-                    font-size: 14.5px;
-                
-                    margin-left: 0.5rem;
-                    font-family: 'Inter';
-                    background:none;
-                    outline: none;
-                    border: none;   
-                    color: #666666;     
-
-                }
             }
             .wrapper-signinbuttons{
-                display: flex;
                 justify-content: center;
                 flex-direction: column;
-                gap: 10px;
-                width: 100%;
             }
         }
     }
-  
-}
+
+    .pt-signin {
+        padding-top: 8rem;
+    }
