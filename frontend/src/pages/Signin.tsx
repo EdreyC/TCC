@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth";
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Sigin() {
 
@@ -17,7 +17,7 @@ export default function Sigin() {
   const navigate = useNavigate();
   const { user, signInWithGoogle } = useAuth()
 
-  if (user) {
+  if(user) {
     navigate("/")
   }
 

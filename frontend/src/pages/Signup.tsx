@@ -1,17 +1,43 @@
 import { useEffect, useState } from 'react'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import '../styles/signin.scss'
 import Button from '../components/Button'
 import { BiLock, BiUser } from 'react-icons/bi'
 import { MdOutlineMail } from 'react-icons/md'
-import { FiEye, FiEyeOff } from 'react-icons/fi'
-import { BsGoogle } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
 import { Col, Container, Row } from 'react-bootstrap'
-import { useNavigate } from "react-router-dom"
-import { useAuth } from "../hooks/useAuth";
 
 const Signup = () => {
   const [pass, setPass] = useState(false);
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const auth = getAuth();
+
+  async function EmailPasswordSignup() {
+    if (email == "" || password == "") {
+      document.getElementById("email")?.focus()
+    }
+    else if (password != confirmPassword) {
+      //avisar
+    }
+    else {
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    }
+
+  }
 
   return (
     <Container className="pt-signin">
@@ -26,21 +52,21 @@ const Signup = () => {
           <div className="form-signin my-3">
             <div className='input-email my-2 d-flex hstack gap-2'>
               <BiUser size={22} color='#363636' />
-              <input type='text' placeholder='Type your name' />
+              <input type='text' placeholder='Type your name' value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div className='input-email my-2 d-flex hstack gap-2'>
               <MdOutlineMail size={22} color='#363636' />
-              <input type='text' placeholder='Type your email' />
+              <input type='text' placeholder='Type your email' value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className='input-password my-2 d-flex hstack gap-3'>
               <BiLock size={22} color='#363636' />
-              <input type={pass ? "text" : 'password'} placeholder='Type your password' />
+              <input type={pass ? "text" : 'password'} placeholder='Type your password' value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <div className='input-password my-2 d-flex hstack gap-3'>
               <BiLock size={22} color='#363636' />
-              <input type={pass ? "text" : 'password'} placeholder='Confirm your password' />
+              <input type={pass ? "text" : 'password'} placeholder='Confirm your password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
             </div>
-            
+
             <div className='wrapper-signinbuttons d-flex'>
               <Button>Sign Up</Button>
             </div>
@@ -48,7 +74,7 @@ const Signup = () => {
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
 export default Signup;
