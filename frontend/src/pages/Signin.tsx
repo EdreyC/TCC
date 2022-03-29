@@ -12,16 +12,25 @@ import { useAuth } from "../hooks/useAuth";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Sigin() {
-
+  const [userWithoutGoogle, setUserWithoutGoogle]= useState([{}])
   const [pass, setPass] = useState(false);
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const { user, signInWithGoogle } = useAuth()
+  const auth = getAuth();
 
   if(user) {
     navigate("/")
   }
 
-
+  async function SignInWithEmailAndPassword(){
+   await signInWithEmailAndPassword(auth,email,password).then((res)=>{
+      console.log(res.user);
+      // setUserWithoutGoogle(res.user)
+    })
+    navigate("/")
+  }
   async function SignInWithGoogle() {
 
     if (!user) {
@@ -43,19 +52,19 @@ export default function Sigin() {
           <div className="form-signin my-3">
             <div className='input-email my-2 d-flex hstack gap-2'>
               <MdOutlineMail size={22} color='#363636' />
-              <input type='text' placeholder='Type your email' />
+              <input type='email'  value={email} onChange={e=>setEmail(e.target.value)} placeholder='Type your email' />
             </div>
             <div className='input-password my-2 d-flex hstack gap-3'>
               <BiLock size={22} color='#363636' />
-              <input type={pass ? "text" : 'password'} placeholder='Type your password' />
-              <button className='ms-auto' onClick={() => setPass(pass ? false : true)} >
+              <input  type={pass ? "text" : 'password'} value={password} onChange={e=>setPassword(e.target.value)} placeholder='Type your password' />
+              <button className='ms-auto'  onClick={() => setPass(pass ? false : true)} >
                 {pass ? (<FiEye size={22}
                 />) : (<FiEyeOff size={22}
                 />)}
               </button>
             </div>
             <div className='wrapper-signinbuttons d-flex'>
-              <Button>Sign In</Button>
+              <Button onClick={SignInWithEmailAndPassword}>Sign In</Button>
               <Button style={{ background: "#db3236", display: 'flex', gap: "10px" }} onClick={SignInWithGoogle}><BsGoogle />Sign in with google </Button>
             </div>
 

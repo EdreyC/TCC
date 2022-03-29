@@ -1,7 +1,6 @@
 import { signOut } from "firebase/auth";
-import { useEffect } from "react";
-import { Dropdown, DropdownButton } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+
+import {  useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { auth } from "../services/firebase";
 
@@ -12,6 +11,7 @@ export default function Home() {
   async function SignOut() {
 
     await signOut(auth).then(() => {
+   
       console.log(auth.name)
 
     }).catch((error) => {
@@ -21,13 +21,12 @@ export default function Home() {
     navigate('/signin')
 
   }
- 
 
   return (
 
     <div>
 
-        <button onClick={SignOut} >Logout</button>
+      <button onClick={SignOut} >Logout</button>
       <h1>{user?.name}</h1>
       <img src={user?.avatar} alt="" />
 
