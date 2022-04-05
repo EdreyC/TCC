@@ -19,7 +19,7 @@ const Signup = () => {
     if (!auth.currentUser) {
       if (email == "" || password == "") {
         document.getElementById("email")?.focus()
-        alert("preenche as credenciais")
+        alert("preencha as credenciais")
       }
       else if (password != confirmPassword) {
         //avisar

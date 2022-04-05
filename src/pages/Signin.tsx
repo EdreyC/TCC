@@ -12,7 +12,8 @@ import { useAuth } from "../hooks/useAuth";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Sigin() {
-  const [userWithoutGoogle, setUserWithoutGoogle]= useState([{}])
+
+  const [userWithoutGoogle, setUserWithoutGoogle]= useState({})
   const [pass, setPass] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -25,18 +26,20 @@ export default function Sigin() {
   }
 
   async function SignInWithEmailAndPassword(){
+
    await signInWithEmailAndPassword(auth,email,password).then((res)=>{
-      console.log(res.user);
-      // setUserWithoutGoogle(res.user)
+      setUserWithoutGoogle(res.user)
     })
     navigate("/")
   }
-  async function SignInWithGoogle() {
 
-    if (!user) {
+
+
+    async function SignInWithGoogle() {
+
       await signInWithGoogle();
-    }
-    navigate("/")
+  
+    navigate("/");
   }
 
   return (

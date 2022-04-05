@@ -1,4 +1,4 @@
-h1,p,span,a,button{
+button{
     font-family: 'Inter';
     
 }
@@ -10,6 +10,10 @@ a{
     }
 
 }
+input{
+    outline: none;
+}
 
 html,body{
+    font-family: 'Inter';
 }

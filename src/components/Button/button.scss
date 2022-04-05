@@ -14,7 +14,7 @@
     min-width: 70%;
     outline: none;
     justify-content: center;
-    
+    min-width: max-content;
     &:hover{
         cursor: pointer;
         background-color: #6250d3;
