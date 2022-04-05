@@ -8,7 +8,7 @@ import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { auth } from '../../services/firebase';
-import { FiSettings } from 'react-icons/fi';
+import { FiLogOut, FiSettings } from 'react-icons/fi';
 const options = [
   'None',
   'Atria',
@@ -88,7 +88,7 @@ export default function LongMenu() {
           </MenuItem>
         ))} */}
            <MenuItem disabled onClick={handleClose}>Alterar foto</MenuItem>
-           <MenuItem onClick={LogOut}>Logout</MenuItem>
+           <MenuItem onClick={LogOut}><FiLogOut style={{marginRight:10}}/>Logout</MenuItem>
 
       </Menu>
     </div>
