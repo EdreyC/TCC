@@ -1,6 +1,6 @@
 type Props = {
     NameProjectAndTask:string;
-    time:string;
+    time?:string;
 }
 const Task = (props:Props)=>{
     
