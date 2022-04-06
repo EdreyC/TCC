@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import { useEffect } from "react";
 import { Dropdown } from "react-bootstrap";
-import { BsFillPlusSquareFill } from "react-icons/bs"
+import { BsPlus } from "react-icons/bs"
 import { FiSettings } from "react-icons/fi";
 import Navbar from "../components/navbar";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import { auth } from "../services/firebase";
 import Button from './../components/Button/index';
 import FadeMenu from './../components/menu/index';
 import LongMenu from "./../components/menu/index";
+import Task from "../components/task";
 
 export default function Home() {
 
@@ -39,7 +40,7 @@ export default function Home() {
 
       {/* <button onClick={SignOut} >Logout</button> */}
 
-      <div className="d-flex align-items-center justify-content-end p-3 gap-3">
+      <div className="d-flex align-items-center justify-content-end py-4 px-5 gap-3">
 
         {/* <Dropdown>
           <Dropdown.Toggle className="d-none">
@@ -59,14 +60,17 @@ export default function Home() {
 
       </div>
 
-      <div className="d-flex justify-content-center">
-        <div className="d-flex p-2 border border-2 border-secondary rounded ">
+      <div className="d-flex justify-content-center flex-column align-items-center gap-5">
+        <div className="d-flex p-2 border border-2  border-secondary rounded ">
           <input type="text" className="border-0 " placeholder="Create a new project" />
-          <BsFillPlusSquareFill color="#7862FF" style={{ cursor: "pointer" }} onClick={() => alert("dasdas")} size={25} />
+          <Button radius="0.5rem" padding="3px"><BsPlus color="white"  size={25} /></Button>
+          
         </div>
 
-        <div>
-          {/* .map... */}
+        <div className="d-flex justify-content-center align-items-center border border-2 border-secondary rounded p-3">
+
+          <Task NameProjectAndTask="Nomedoprojeto/nomedatask" time="expira em algumas horas"></Task>
+          
         </div>
       </div>
 

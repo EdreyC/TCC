@@ -87,8 +87,8 @@ export default function LongMenu() {
             {option}
           </MenuItem>
         ))} */}
-           <MenuItem disabled onClick={handleClose}>Alterar foto</MenuItem>
-           <MenuItem onClick={LogOut}><FiLogOut style={{marginRight:10}}/>Logout</MenuItem>
+           {/* <MenuItem disabled onClick={handleClose}>Alterar foto</MenuItem> */}
+           <MenuItem onClick={LogOut}><FiLogOut style={{marginRight:10}}/><span className='fw-bolder'>Logout</span></MenuItem>
 
       </Menu>
     </div>
