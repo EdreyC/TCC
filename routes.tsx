@@ -11,14 +11,21 @@ import { isAuthenticated } from "./src/util/auth"
 
 
 export default function MainRoutes() {
+    
   const { user, signInWithGoogle } = useAuth()
   const navigate = useNavigate();
 
   useEffect(() => {
     isAuthenticated()
-
   }, [])
 
+  // if(isAuthenticated() == true){
+  //   navigate("/");
+
+  // }
+  // else{
+  //   navigate("/signin")
+  // }
   return (
     <Routes>
       <Route path="/signin" element={<Signin />} />
@@ -26,7 +33,7 @@ export default function MainRoutes() {
       <Route element={<PrivateRoute />}>
         <Route path="/" element={<Home />} />
       </Route>
-      <Route path="*" element={<h1>404</h1>} />
+      <Route path="*" element={<span>Rota errada 404</span>} />
     </Routes>
 
   )

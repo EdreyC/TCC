@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from 'react'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import '../styles/signin.scss'
 import Button from '../components/Button'
 import { BiLock, BiUser } from 'react-icons/bi'
@@ -16,26 +16,31 @@ const Signup = () => {
   const auth = getAuth();
 
   async function EmailPasswordSignup() {
-    if (email == "" || password == "") {
-      document.getElementById("email")?.focus()
+    if (!auth.currentUser) {
+      if (email == "" || password == "") {
+        document.getElementById("email")?.focus()
+        alert("preencha as credenciais")
+      }
+      else if (password != confirmPassword) {
+        //avisar
+      }
+      else {
+        await createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            console.log(userCredential.user)
+            const user = userCredential.user;
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+          });
+      }
+    }else{
+  
     }
-    else if (password != confirmPassword) {
-      //avisar
-    }
-    else {
-      await createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in
 
-          const user = userCredential.user;
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ..
-        });
-    }
 
   }
 
@@ -56,7 +61,7 @@ const Signup = () => {
             </div>
             <div className='input-email my-2 d-flex hstack gap-2'>
               <MdOutlineMail size={22} color='#363636' />
-              <input type='text' placeholder='Type your email' value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input id="email" type='text' placeholder='Type your email' value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className='input-password my-2 d-flex hstack gap-3'>
               <BiLock size={22} color='#363636' />
@@ -68,7 +73,7 @@ const Signup = () => {
             </div>
 
             <div className='wrapper-signinbuttons d-flex'>
-              <Button>Sign Up</Button>
+              <Button onClick={EmailPasswordSignup}>Sign Up</Button>
             </div>
           </div>
         </Col>

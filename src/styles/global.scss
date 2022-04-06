@@ -1,0 +1,16 @@
+html,body,button,li,ul,span{
+    font-family: 'Inter';
+    
+}
+a{
+    color: #7862FF;
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+
+}
+input{
+    outline: none;
+}
+
