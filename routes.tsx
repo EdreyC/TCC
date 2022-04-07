@@ -7,6 +7,7 @@ import Signin from "./src/pages/Signin"
 import Signup from "./src/pages/Signup"
 import PrivateRoute from "./src/components/PrivateRoute"
 import { isAuthenticated } from "./src/util/auth"
+import Board from "./src/pages/Board"
 
 
 
@@ -32,6 +33,7 @@ export default function MainRoutes() {
       <Route path="/signup" element={<Signup />} />
       <Route element={<PrivateRoute />}>
         <Route path="/" element={<Home />} />
+        <Route path="/board" element={<Board />} />
       </Route>
       <Route path="*" element={<span>Rota errada 404</span>} />
     </Routes>
