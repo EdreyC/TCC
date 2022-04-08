@@ -73,7 +73,7 @@ const Signup = () => {
             </div>
 
             <div className='wrapper-signinbuttons d-flex'>
-              <Button onClick={EmailPasswordSignup}>Sign Up</Button>
+              <Button padding='0.5rem' onClick={EmailPasswordSignup}>Sign Up</Button>
             </div>
           </div>
         </Col>

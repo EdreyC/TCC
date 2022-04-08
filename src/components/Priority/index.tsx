@@ -1,30 +1,35 @@
 const theme = {
-    colors:{
-        DoNow:"#DF2B4B",
-        High:"#FF4E6E",
-        Medium:"#FFC56D",
-        Low:"#69D26D"
+    
+    colors: {
+        DoNow: "#DF2B4B",
+        High: "#FF4E6E",
+        Medium: "#FFC56D",
+        Low: "#69D26D"
     },
-    title:{
-        DoNow:"Do Now",
-        High:"High",
-        Medium:"Medium",
-        Low:"Low"
+    title: {
+        DoNow: "Do Now",
+        High: "High",
+        Medium: "Medium",
+        Low: "Low"
     }
- }
-// type Props = {
-//     colors:{
+}
 
-//     }
-// }
-const Priority = ()=>{
+type Props = {
+    number:number | undefined;
+}
 
-        
-    return(
-        <div>
-            <h1>{}</h1>
+export const Priority = (props:Props) => {
+
+    return (
+        <div {...props.number} className=" text-white rounded py-1 px-4" style={{ backgroundColor:theme.colors.DoNow,fontWeight: 600 }}>
+            {theme.title.DoNow}
         </div>
     )
 }
-export default Priority;
+
+// export const High = ()=>{
+//     return (
+
+//     )
+// }
 

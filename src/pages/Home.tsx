@@ -19,7 +19,7 @@ export default function Home() {
   const [name, setName] = useState("");
 
 
-    const task=[{name:name}]
+  // const task = [{ name: name }]
 
 
   return (
@@ -28,11 +28,8 @@ export default function Home() {
 
 
       <div className="d-flex align-items-center justify-content-end py-4 px-5 gap-3">
-
         <LongMenu />
-
         <h1 className="fs-5  fw-medium">{user?.name}</h1>
-
       </div>
 
       <div className="d-flex justify-content-center flex-column align-items-center gap-5">
@@ -48,8 +45,6 @@ export default function Home() {
 
         </div>
       </div>
-
-
     </div>
   )
 }
