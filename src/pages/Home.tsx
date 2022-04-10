@@ -19,21 +19,16 @@ export default function Home() {
   const [name, setName] = useState("");
 
 
-    const task=[{name:name}]
-
+  // const task = [{ name: name }]
+  
 
   return (
 
     <div>
 
 
-      <div className="d-flex align-items-center justify-content-end py-4 px-5 gap-3">
-
-        <LongMenu />
-
-        <h1 className="fs-5  fw-medium">{user?.name}</h1>
-
-      </div>
+      <Navbar/>
+     
 
       <div className="d-flex justify-content-center flex-column align-items-center gap-5">
         <div className="d-flex p-2 border border-2  border-secondary rounded ">
