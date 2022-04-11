@@ -33,8 +33,6 @@ export default function Sigin() {
     navigate("/")
   }
 
-
-
     async function SignInWithGoogle() {
 
       await signInWithGoogle();

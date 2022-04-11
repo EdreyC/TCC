@@ -3,5 +3,18 @@ import { useAuth } from "../hooks/useAuth";
 
 export const isAuthenticated = () => {
     
- return true;
+    // const navigate = useNavigate();
+    // const { user } = useAuth();
+    // // const boolean = false;
+    // if (user) {
+    //     // navigate("/")
+    //     return true;
+
+    // }
+    // else {
+    //     // navigate("/signin")
+    //     return false;
+
+    // }
+
 };

@@ -1,22 +1,19 @@
 import { Container, Nav } from "react-bootstrap"
+import { useAuth } from "../../hooks/useAuth";
+import LongMenu from "../menu";
 
-type Props = {
-    img:string | undefined;
-} 
 
- const NavBar = (props:Props)=>{
+ const NavBar = ()=>{
+  const { user } = useAuth()
+   
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container-fluid">
-        {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button> */}
-          <a className="navbar-brand" href="#">Agilize.it</a>
-       
-         <h1 className="">Nome</h1>
-         <img src={props?.img} alt="" />
-        </div>
-      </nav>
+      <div className="d-flex align-items-center justify-content-end py-4 px-5 gap-3">
+
+      <LongMenu />
+
+      <h1 className="fs-5  fw-medium">{user?.name}</h1>
+
+    </div>
     )
 }
 export default NavBar;
