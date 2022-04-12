@@ -20,7 +20,10 @@ export default function MainRoutes() {
 
   useEffect(() => {
 
-   user? navigate("/"):navigate("/signin")
+
+    if(!user){
+      navigate("/signin")
+    }
 
   }, [])
 
@@ -33,13 +36,13 @@ export default function MainRoutes() {
   // }
   return (
     <Routes>
-      <Route path="/signin" element={<Signin />} />
-      <Route path="/signup" element={<Signup />} />
-      
       <Route element={<PrivateRoute />}>
         <Route path="/" element={<Home />} />
         <Route path="/board" element={<Board />} />
       </Route>
+      <Route path="/signin" element={<Signin />} />
+      <Route path="/signup" element={<Signup />} />
+      
       <Route path="*" element={<span>Route dont found 404</span>} />
     </Routes>
 

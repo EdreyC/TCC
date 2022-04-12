@@ -36,8 +36,7 @@ export default function Sigin() {
     async function SignInWithGoogle() {
 
       await signInWithGoogle();
-  
-    navigate("/");
+      navigate("/");
   }
 
   return (
@@ -64,9 +63,9 @@ export default function Sigin() {
                 />)}
               </button>
             </div>
-            <div className='wrapper-signinbuttons d-flex'>
-              <Button onClick={SignInWithEmailAndPassword}>Sign In</Button>
-              <Button style={{ background: "#db3236", display: 'flex', gap: "10px" }} onClick={SignInWithGoogle}><BsGoogle />Sign in with google </Button>
+            <div className='wrapper-signinbuttons d-flex gap-2'>
+              <Button padding={"0.5rem"} onClick={()=>SignInWithEmailAndPassword()}>Sign In</Button>
+              <Button padding={"0.5rem"} backgroundColor='#db3236' onClick={()=>SignInWithGoogle()}><BsGoogle />Sign in with google </Button>
             </div>
 
             <span>Don't have an account? <Link to="/signup">Sign Up</Link> </span>

@@ -37,8 +37,6 @@ const Signup = () => {
             // ..
           });
       }
-    }else{
-  
     }
 
 
@@ -73,7 +71,7 @@ const Signup = () => {
             </div>
 
             <div className='wrapper-signinbuttons d-flex'>
-              <Button onClick={EmailPasswordSignup}>Sign Up</Button>
+              <Button onClick={()=>(EmailPasswordSignup())}>Sign Up</Button>
             </div>
           </div>
         </Col>
