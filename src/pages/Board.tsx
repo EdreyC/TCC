@@ -84,7 +84,7 @@ export default function Board() {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                        <textarea name="" id="" cols="30" rows="10" placeholder="Add your comment..."></textarea>
+                        <textarea name="" id="" cols={30} rows={10} placeholder="Add your comment..."></textarea>
                     </Modal.Footer>
                 </Modal>
             }

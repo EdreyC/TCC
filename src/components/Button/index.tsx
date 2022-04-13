@@ -6,15 +6,15 @@ type Props = {
     ButtonProps?: ButtonProps 
     padding?:string | number
     radius?:string 
-    backgroundColor?:string
+    backgroundcolor?:string
     children:any;
-    onClick:()=>void;
+    onClick?:()=>void;
 }
 
 
 export default function Button(props: Props){
     return(
-        <button {...props} style={{padding:props?.padding, backgroundColor:props?.backgroundColor,borderRadius:props?.radius}}className="button">
+        <button {...props} style={{padding:props?.padding, backgroundColor:props?.backgroundcolor,borderRadius:props?.radius}}className="button">
 
             {/* {propsChildren.children} */}
 

@@ -18,28 +18,12 @@ export default function MainRoutes() {
   const { user, signInWithGoogle } = useAuth()
   const navigate = useNavigate();
 
-  useEffect(() => {
-
-
-    if(!user){
-      navigate("/signin")
-    }
-
-  }, [])
-
-  // if(isAuthenticated() == true){
-  //   navigate("/");
-
-  // }
-  // else{
-  //   navigate("/signin")
-  // }
   return (
     <Routes>
-      <Route element={<PrivateRoute />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/board" element={<Board />} />
-      </Route>
+  
+      <Route path="/" element={<Home />} />
+      <Route path="/board" element={<Board />} />
+
       <Route path="/signin" element={<Signin />} />
       <Route path="/signup" element={<Signup />} />
       

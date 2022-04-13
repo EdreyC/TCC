@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-export default function Sigin() {
+export default function Signin() {
 
   const [userWithoutGoogle, setUserWithoutGoogle]= useState({})
   const [pass, setPass] = useState(false);
@@ -23,7 +23,7 @@ export default function Sigin() {
 
   if(user) {
     navigate("/")
-  }
+  }k
 
   async function SignInWithEmailAndPassword(){
 
@@ -65,7 +65,7 @@ export default function Sigin() {
             </div>
             <div className='wrapper-signinbuttons d-flex gap-2'>
               <Button padding={"0.5rem"} onClick={()=>SignInWithEmailAndPassword()}>Sign In</Button>
-              <Button padding={"0.5rem"} backgroundColor='#db3236' onClick={()=>SignInWithGoogle()}><BsGoogle />Sign in with google </Button>
+              <Button padding={"0.5rem"} backgroundcolor='#db3236' onClick={()=>SignInWithGoogle()}><BsGoogle />Sign in with google </Button>
             </div>
 
             <span>Don't have an account? <Link to="/signup">Sign Up</Link> </span>

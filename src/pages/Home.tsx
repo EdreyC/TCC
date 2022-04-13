@@ -15,21 +15,12 @@ import Task from "../components/task";
 
 export default function Home() {
 
-  const { user } = useAuth()
   const [name, setName] = useState("");
-
-
-  // const task = [{ name: name }]
-  
-
+  const navigate = useNavigate();
   return (
 
     <div>
-
-
       <Navbar/>
-     
-
       <div className="d-flex justify-content-center flex-column align-items-center gap-5">
         <div className="d-flex p-2 border border-2  border-secondary rounded ">
           <input value={name} onChange={e => setName(e.target.value)} type="text" className="border-0 " placeholder="Create a new project" />
