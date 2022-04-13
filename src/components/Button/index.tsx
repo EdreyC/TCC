@@ -7,7 +7,7 @@ type Props = {
     padding?:string | number
     radius?:string 
     backgroundColor?:string
-    children:string;
+    children:any;
     onClick:()=>void;
 }
 
