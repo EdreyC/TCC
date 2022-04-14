@@ -1,26 +1,40 @@
-import { signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { Dropdown } from "react-bootstrap";
 import { BsPlus } from "react-icons/bs"
-import { FiSettings } from "react-icons/fi";
 import Navbar from "../components/navbar";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import { auth } from "../services/firebase";
-
+import { db } from "../services/firebase";
 import Button from './../components/Button/index';
-import FadeMenu from './../components/menu/index';
-import LongMenu from "./../components/menu/index";
 import Task from "../components/task";
+import { arrayUnion, collection, getDocs, query, where } from "firebase/firestore";
+
+type Api = {
+  teste: string;
+}
 
 export default function Home() {
-
+  const api:[] = [];
   const [name, setName] = useState("");
   const navigate = useNavigate();
+  const [data, setData] = useState({});
+  
+  useEffect(() => {
+    async function getData() {
+      const q = query(collection(db, "Teste"));
+      const datadocs = await getDocs(q);
+      setData(datadocs.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+      api.push(data);
+    }
+    getData();
+  }, [])
   return (
 
     <div>
-      <Navbar/>
+      <Navbar />
+      {
+        api.map(item=>(
+          <h1>{item}</h1>
+        ))
+      }
       <div className="d-flex justify-content-center flex-column align-items-center gap-5">
         <div className="d-flex p-2 border border-2  border-secondary rounded ">
           <input value={name} onChange={e => setName(e.target.value)} type="text" className="border-0 " placeholder="Create a new project" />
