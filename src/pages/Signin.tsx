@@ -23,7 +23,7 @@ export default function Signin() {
 
   if(user) {
     navigate("/")
-  }k
+  }
 
   async function SignInWithEmailAndPassword(){
 
