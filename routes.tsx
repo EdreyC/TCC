@@ -18,10 +18,10 @@ export default function MainRoutes() {
 
   return (
     <Routes>
-      <Route element={<PrivateRoute />}>
+      {/* <Route element={<PrivateRoute />}> */}
         <Route path="/" element={<Home />} />
         <Route path="/board" element={<Board />} />
-      </Route>
+      {/* </Route> */}
       <Route path="/signin" element={<Signin />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="*" element={<span>Route dont found 404</span>} />

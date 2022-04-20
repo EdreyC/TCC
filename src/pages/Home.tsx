@@ -26,7 +26,7 @@ export default function Home() {
       name: name,
       owner: user?.name,
     });
-    window.location.reload();
+    // window.location.reload();
 
   }
   async function getData() {
@@ -54,10 +54,10 @@ export default function Home() {
           <Button onClick={() => PostData()} radius="0.5rem" padding="3px"><BsPlus color="white" size={25} /></Button>
         </div>
         <div className="d-flex justify-content-center align-items-center border border-2 border-secondary flex-column gap-4 rounded p-3">
+
           {
-            data.map(item => (
-              <Task NameProjectAndTask={item.name + "/nomedatask"} time="Expira em algumas horas" />
-            ))
+            
+            
           }
         </div>
       </div>
