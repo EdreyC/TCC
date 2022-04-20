@@ -13,7 +13,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Signin() {
 
-  const [userWithoutGoogle, setUserWithoutGoogle]= useState({})
+  const [userWithoutGoogle, setUserWithoutGoogle] = useState({})
   const [pass, setPass] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -21,22 +21,20 @@ export default function Signin() {
   const { user, signInWithGoogle } = useAuth()
   const auth = getAuth();
 
-  if(user) {
+  if (user) {
     navigate("/")
   }
 
-  async function SignInWithEmailAndPassword(){
-
-   await signInWithEmailAndPassword(auth,email,password).then((res)=>{
+  async function SignInWithEmailAndPassword() {
+    await signInWithEmailAndPassword(auth, email, password).then((res) => {
       setUserWithoutGoogle(res.user)
     })
     navigate("/")
   }
 
-    async function SignInWithGoogle() {
-
-      await signInWithGoogle();
-      navigate("/");
+  async function SignInWithGoogle() {
+    await signInWithGoogle();
+    navigate("/");
   }
 
   return (
@@ -52,22 +50,21 @@ export default function Signin() {
           <div className="form-signin my-3">
             <div className='input-email my-2 d-flex hstack gap-2'>
               <MdOutlineMail size={22} color='#363636' />
-              <input type='email'  value={email} onChange={e=>setEmail(e.target.value)} placeholder='Type your email' />
+              <input type='email' value={email} onChange={e => setEmail(e.target.value)} placeholder='Type your email' />
             </div>
             <div className='input-password my-2 d-flex hstack gap-3'>
               <BiLock size={22} color='#363636' />
-              <input  type={pass ? "text" : 'password'} value={password} onChange={e=>setPassword(e.target.value)} placeholder='Type your password' />
-              <button className='ms-auto'  onClick={() => setPass(pass ? false : true)} >
+              <input type={pass ? "text" : 'password'} value={password} onChange={e => setPassword(e.target.value)} placeholder='Type your password' />
+              <button className='ms-auto' onClick={() => setPass(pass ? false : true)} >
                 {pass ? (<FiEye size={22}
                 />) : (<FiEyeOff size={22}
                 />)}
               </button>
             </div>
             <div className='wrapper-signinbuttons d-flex gap-2'>
-              <Button padding={"0.5rem"} onClick={()=>SignInWithEmailAndPassword()}>Sign In</Button>
-              <Button padding={"0.5rem"} backgroundcolor='#db3236' onClick={()=>SignInWithGoogle()}><BsGoogle />Sign in with google </Button>
+              <Button padding={"0.5rem"} onClick={() => SignInWithEmailAndPassword()}>Sign In</Button>
+              <Button padding={"0.5rem"} backgroundcolor='#db3236' onClick={() => SignInWithGoogle()}><BsGoogle />Sign in with google </Button>
             </div>
-
             <span>Don't have an account? <Link to="/signup">Sign Up</Link> </span>
           </div>
         </Col>

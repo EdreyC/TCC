@@ -10,8 +10,8 @@ import { useAuth } from "../hooks/useAuth";
 
 
 type Data = {
-  name:string;
-  owner:string
+  name: string;
+  owner: string
 }
 
 export default function Home() {
@@ -21,13 +21,13 @@ export default function Home() {
   const navigate = useNavigate();
   const [data, setData] = useState<Data[]>([]);
 
-  const PostData = async()=>{
+  const PostData = async () => {
     await addDoc(collection(db, "Projects"), {
       name: name,
       owner: user?.name,
     });
     window.location.reload();
-  
+
   }
   async function getData() {
 
@@ -36,43 +36,31 @@ export default function Home() {
     // console.log(datadocs.docs.map((doc) => ({ ...doc.data()})))
     // setData(datadocs.docs.map(item =>{item.data()}))
     // console.log(datadocs.docs);
-    setData(datadocs.docs.map(item=>item.data()as Data));
+    setData(datadocs.docs.map(item => item.data() as Data));
     console.log(data);
 
   }
   useEffect(() => {
-    
+
     getData();
   }, [])
   return (
 
     <div>
       <Navbar />
-      
-      
       <div className="d-flex justify-content-center flex-column align-items-center gap-5">
         <div className="d-flex p-2 border border-2  border-secondary rounded ">
           <input value={name} onChange={e => setName(e.target.value)} type="text" className="border-0 " placeholder="Create a new project" />
-          <Button onClick={()=>PostData()} radius="0.5rem" padding="3px"><BsPlus color="white" size={25} /></Button>
-
+          <Button onClick={() => PostData()} radius="0.5rem" padding="3px"><BsPlus color="white" size={25} /></Button>
         </div>
-
         <div className="d-flex justify-content-center align-items-center border border-2 border-secondary flex-column gap-4 rounded p-3">
-
-  
           {
-        data.map(item=>(
-          <Task NameProjectAndTask={item.name + "/nomedatask"} time="Expira em algumas horas" />
-        ))
-      }
-
-
+            data.map(item => (
+              <Task NameProjectAndTask={item.name + "/nomedatask"} time="Expira em algumas horas" />
+            ))
+          }
         </div>
       </div>
-
-
     </div>
   )
 }
-
-

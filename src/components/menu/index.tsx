@@ -20,11 +20,10 @@ export default function LongMenu() {
   // const handleClick = (event) => {
   //   setAnchorEl(event.currentTarget);
   // };
-    const navigate = useNavigate();
-    const { user } = useAuth()
+  const navigate = useNavigate();
+  const { user } = useAuth()
 
-    async function SignOut() {
-
+  async function SignOut() {
     await signOut(auth).then(() => {
       navigate('/signin')
 
@@ -34,23 +33,22 @@ export default function LongMenu() {
       console.log(error)
     });
     window.location.reload();
-
   }
- 
+
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const LogOut=()=>{
+  const LogOut = () => {
     SignOut();
   }
 
   return (
     <div>
       <IconButton
-        onClick={(e)=>setAnchorEl(e.currentTarget)}
+        onClick={(e) => setAnchorEl(e.currentTarget)}
       >
         {/* <MoreVertIcon /> */}
-        <img  style={{width:70, height:70}}className="rounded-circle" src={user?.avatar} alt="" />
+        <img style={{ width: 70, height: 70 }} className="rounded-circle" src={user?.avatar} alt="" />
       </IconButton>
       <Menu
         id="long-menu"
@@ -72,11 +70,9 @@ export default function LongMenu() {
             {option}
           </MenuItem>
         ))} */}
-           {/* <MenuItem disabled onClick={handleClose}>Alterar foto</MenuItem> */}
-           <MenuItem onClick={LogOut}><FiLogOut style={{marginRight:10}}/><span className='fw-bolder'>Logout</span></MenuItem>
-
+        {/* <MenuItem disabled onClick={handleClose}>Alterar foto</MenuItem> */}
+        <MenuItem onClick={LogOut}><FiLogOut style={{ marginRight: 10 }} /><span className='fw-bolder'>Logout</span></MenuItem>
       </Menu>
     </div>
   );
 }
-

@@ -14,4 +14,3 @@ export type task = {
   status: string;
   project: string;
 };
-

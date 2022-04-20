@@ -5,7 +5,7 @@ type task_type = {
     name: string,
     priority: number,
     description: string,
-    comments: {user: string, text: string}[]
+    comments: { user: string, text: string }[]
 }
 
 type Props = {
@@ -13,7 +13,6 @@ type Props = {
     tasks: task_type[];
 }
 const CardKanban = (props: Props) => {
-
     return (
         <div className="col-lg-3">
             <Card>

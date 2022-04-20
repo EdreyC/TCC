@@ -38,8 +38,6 @@ const Signup = () => {
           });
       }
     }
-
-
   }
 
   return (
@@ -69,9 +67,8 @@ const Signup = () => {
               <BiLock size={22} color='#363636' />
               <input type={pass ? "text" : 'password'} placeholder='Confirm your password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
             </div>
-
             <div className='wrapper-signinbuttons d-flex'>
-              <Button onClick={()=>(EmailPasswordSignup())}>Sign Up</Button>
+              <Button onClick={() => (EmailPasswordSignup())}>Sign Up</Button>
             </div>
           </div>
         </Col>

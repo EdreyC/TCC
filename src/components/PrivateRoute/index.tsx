@@ -1,4 +1,3 @@
-import { isAuthenticated } from '../../util/auth';
 
 import { Outlet, Navigate } from 'react-router-dom';
 import Home from './../../pages/Home';
