@@ -17,4 +17,13 @@ const Task = (props: Props) => {
         </div>
     )
 }
+export const NoTask = ()=>{
+    return(
+        <div style={{ backgroundColor: "#EAEAEA" }} className="d-flex gap-3 py-2 px-4 rounded justify-content-center align-items-center">
+             <span style={{ fontWeight: 500 }}>
+                 
+             </span>
+        </div>
+    )
+}
 export default Task

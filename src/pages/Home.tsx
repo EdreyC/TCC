@@ -4,7 +4,7 @@ import Navbar from "../components/navbar";
 import { useNavigate } from "react-router-dom";
 import { db } from "../services/firebase";
 import Button from './../components/Button/index';
-import Task from "../components/task";
+import Task,{NoTask} from "../components/task";
 import { addDoc, arrayUnion, collection, getDocs, query, QueryDocumentSnapshot, where } from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
 
@@ -53,13 +53,20 @@ export default function Home() {
           <input value={name} onChange={e => setName(e.target.value)} type="text" className="border-0 " placeholder="Create a new project" />
           <Button onClick={() => PostData()} radius="0.5rem" padding="3px"><BsPlus color="white" size={25} /></Button>
         </div>
-        <div className="d-flex justify-content-center align-items-center border border-2 border-secondary flex-column gap-4 rounded p-3">
+        
 
           {
-            
-            
+            data.length == 0 ? <h2>Create your first task above ☝</h2> :
+            <div className="d-flex justify-content-center align-items-center border border-2 border-secondary flex-column gap-4 rounded p-3">
+              {
+                data.map(item => (
+                  <Task NameProjectAndTask={item.name + "/nomedatask"} time="Expira em algumas horas" />
+                ))
+              }
+              
+              </div>
           }
-        </div>
+        
       </div>
     </div>
   )
