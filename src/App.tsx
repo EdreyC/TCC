@@ -8,7 +8,6 @@ import Navbar from "./components/navbar";
 function App() {
   return (
     <AuthContextProvider>
-      
       <MainRoutes />
     </AuthContextProvider>
   )

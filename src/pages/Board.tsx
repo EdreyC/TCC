@@ -40,7 +40,7 @@ export default function Board() {
     const [tasksDone, setTasksDone] = useState<task_type[]>([]);
 
     const addTask = (type: number) => {
-            
+
     }
 
     return (
@@ -75,7 +75,7 @@ export default function Board() {
                                             <div key={comments.user}>
                                                 <h6><strong>{comments.user}</strong></h6>
                                                 <p><small>{comments.text}</small></p>
-                                            <hr />
+                                                <hr />
                                             </div>
                                         )
                                     })}
@@ -84,7 +84,7 @@ export default function Board() {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                        <textarea name="" id="" cols="30" rows="10" placeholder="Add your comment..."></textarea>
+                        <textarea name="" id="" cols={30} rows={10} placeholder="Add your comment..."></textarea>
                     </Modal.Footer>
                 </Modal>
             }

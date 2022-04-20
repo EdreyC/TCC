@@ -1,23 +1,24 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import './button.scss'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
+type Props = {
+    ButtonProps?: ButtonProps 
+    padding?:string | number
+    radius?:string 
+    backgroundcolor?:string
     children:any;
-    radius:string
-    padding:string;
+    onClick?:()=>void;
 }
-// type Props = {
-//     // ButtonProps?: ButtonProps |undefined;
-//     padding?:string | number |undefined;
-//     radius?:string | undefined
-//     children:any
-// }
 
-    
-export default function Button( propsButton:ButtonProps){
+
+export default function Button(props: Props){
     return(
-        <button style={{padding:propsButton.padding,borderRadius:propsButton.radius}} className="button" {...propsButton} ></button>
-          
-        
+        <button {...props} style={{padding:props?.padding, backgroundColor:props?.backgroundcolor,borderRadius:props?.radius}}className="button">
+
+            {/* {propsChildren.children} */}
+
+        </button>
+
     )
 }
