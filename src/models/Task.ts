@@ -1,12 +1,11 @@
-import { doc, setDoc, Timestamp} from "firebase/firestore";
-import { db } from "../services/firebase";
+import { Timestamp } from "firebase/firestore";
 
 export type task = {
   id: string;
   name: string;
   priority: string;
   description: string;
-  comments: { user: string; text: string; date: Timestamp; uid: string }[];
+  comments: { text: string; date: Timestamp; uid: string }[];
   date: Timestamp;
   uid: string;
   tags: string[];
@@ -14,3 +13,4 @@ export type task = {
   status: string;
   project: string;
 };
+

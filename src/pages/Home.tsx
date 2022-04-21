@@ -4,7 +4,7 @@ import Navbar from "../components/navbar";
 import { useNavigate } from "react-router-dom";
 import { db } from "../services/firebase";
 import Button from './../components/Button/index';
-import Task from "../components/task";
+import Task, { NoTask } from "../components/task";
 import { addDoc, arrayUnion, collection, getDocs, query, QueryDocumentSnapshot, where } from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
 
@@ -25,7 +25,7 @@ export default function Home() {
       name: name,
       owner: user?.name,
     });
-    window.location.reload();
+    // window.location.reload();
 
   }
   async function getData() {
@@ -50,11 +50,15 @@ export default function Home() {
       </div>
       <div className="d-flex justify-content-center align-items-center border border-2 border-secondary flex-column gap-4 rounded p-3">
         {
-          data.map(item => (
-            <Task NameProjectAndTask={item.name + "/nomedatask"} time="Expira em algumas horas" />
-          ))
-        }
+          data.length == 0 ? <h2>Create your first task above ☝</h2> :
+            <div className="d-flex justify-content-center align-items-center border border-2 border-secondary flex-column gap-4 rounded p-3">
+              {
+                data.map(item => (
+                  <Task NameProjectAndTask={item.name + "/nomedatask"} time="Expira em algumas horas" />
+                ))
+              }
+            </div>
+        })
       </div>
     </div>
-  )
 }

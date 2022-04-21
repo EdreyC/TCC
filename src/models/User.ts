@@ -6,3 +6,14 @@ export type user = {
   name: string;
   displayName: string;
 };
+
+export async function addData(){
+
+  const name = "meunome"
+
+  await setDoc(doc(db, "users"), {
+    uid: "uid",
+    name: name,
+    displayName: "displayName"
+  });
+} 
