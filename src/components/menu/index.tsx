@@ -38,6 +38,7 @@ export default function LongMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
   const LogOut = () => {
     SignOut();
   }
