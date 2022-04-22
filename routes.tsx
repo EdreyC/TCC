@@ -26,7 +26,15 @@ export default function MainRoutes() {
           </div >
         </>
       } />
-      <Route path="/board" element={<Board />} />
+      <Route path="/board" element={
+        <>
+          <Navbar />
+          <div className="d-flex" style={{ position: "relative", height: "100%" }}>
+            <SideBar />
+            <Board />
+          </div >
+        </>
+      } />
       {/* </Route> */}
       <Route path="/signin" element={<Signin />} />
       <Route path="/signup" element={<Signup />} />

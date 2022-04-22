@@ -5,11 +5,10 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
 import { signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { auth } from '../../services/firebase';
 import { FiLogOut, FiSettings } from 'react-icons/fi';
-
 
 const ITEM_HEIGHT = 48;
 
@@ -38,7 +37,7 @@ export default function LongMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
   const LogOut = () => {
     SignOut();
   }
