@@ -1,6 +1,5 @@
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import { FaGem, FaHeart, FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { BiHome } from 'react-icons/bi';
@@ -12,7 +11,7 @@ const SideBar = () => {
 
     return (
         <ProSidebar collapsed={collapsed}>
-            <SidebarHeader>
+            <SidebarHeader >
                 {collapsed &&
                     <MenuItem className='text-center' onClick={(e) => setCollapsed(!collapsed)}><AiOutlineRight /></MenuItem>
                 }
@@ -20,7 +19,7 @@ const SideBar = () => {
                     <MenuItem className='text-center' onClick={(e) => setCollapsed(!collapsed)}><AiOutlineLeft /></MenuItem>
                 }
             </SidebarHeader>
-            <SidebarContent>
+            <SidebarContent >
                 <Menu iconShape="square">
                     <MenuItem icon={<BiHome />}><Link to='/'>Home</Link></MenuItem>
                     <MenuItem icon={<HiViewBoards />}><Link to='/board'>Board</Link></MenuItem>

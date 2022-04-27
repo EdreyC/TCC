@@ -1,16 +1,24 @@
 const theme = {
-    colors:{
-        DoNow:"#DF2B4B",
-        High:"#FF4E6E",
-        Medium:"#FFC56D",
-        Low:"#69D26D"
+
+    DoNow:{
+        colors:"#DF2B4B",
+        title:"Do Now" 
     },
-    title:{
-        DoNow:"Do Now",
-        High:"High",
-        Medium:"Medium",
-        Low:"Low"
-    }
+    High:{
+        colors:"#FF4E6E",   
+        title:"High"
+    },
+    Medium:{
+        colors:"#FFC56D",
+        title:"Medium"
+    },
+    Low:{
+        colors:"#69D26D",
+        title:"Low"
+    },
+
+    
+   
  }
 // type Props = {
 //     colors:{
