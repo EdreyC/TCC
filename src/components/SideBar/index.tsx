@@ -22,11 +22,10 @@ const SideBar = () => {
             <SidebarContent >
                 <Menu iconShape="square">
                     <MenuItem icon={<BiHome />}><Link to='/'>Home</Link></MenuItem>
-                    <MenuItem icon={<HiViewBoards />}><Link to='/board'>Board</Link></MenuItem>
-                    {/* <SubMenu title="Components" icon={<FaHeart />}>
-                        <MenuItem>Component 1</MenuItem>
-                        <MenuItem>Component 2</MenuItem>
-                    </SubMenu> */}
+                    <SubMenu title="Board" icon={<HiViewBoards />}>
+                        <MenuItem><Link to='/board'>Board</Link></MenuItem>
+                        <MenuItem><Link to='/board'>Board</Link></MenuItem>
+                    </SubMenu>
                 </Menu>
             </SidebarContent>
             <SidebarFooter>
