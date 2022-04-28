@@ -51,7 +51,7 @@ export default function Home() {
       <div className="d-flex justify-content-center align-items-center border border-2 border-secondary flex-column gap-4 rounded p-3">
         {
           data.length == 0 ? <h2>Create your first task above ☝</h2> :
-            <div className="d-flex justify-content-center align-items-center border border-2 border-secondary flex-column gap-4 rounded p-3">
+            <div className="d-flex justify-content-center align-items-center  flex-column gap-4 rounded p-3">
               {
                 data.map(item => (
                   <Task NameProjectAndTask={item.name + "/nomedatask"} time="Expira em algumas horas" />
