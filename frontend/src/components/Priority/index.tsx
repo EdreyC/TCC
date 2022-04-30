@@ -1,35 +1,37 @@
+import { useState } from "react";
+
 const theme = {
+    DoNow: {
+        background: "#DF2B4B",
+        title: "Do Now",
+        color: "#FFFFFF"
+    },
+    High: {
+        background: "#FF4E6E",
+        title: "High",
+        color: "#FFFFFF"
+    },
+    Medium: {
+        background: "#FFC56D",
+        title: "Medium",
+        color: "#FFFFFF"
+    },
+    Low: {
+        background: "#69D26D",
+        title: "Low",
+        color: "#FFFFFF"
+    },
+}
 
-    DoNow:{
-        colors:"#DF2B4B",
-        title:"Do Now" 
-    },
-    High:{
-        colors:"#FF4E6E",   
-        title:"High"
-    },
-    Medium:{
-        colors:"#FFC56D",
-        title:"Medium"
-    },
-    Low:{
-        colors:"#69D26D",
-        title:"Low"
-    },
+type Props = {
+    priority: string
+}
 
-    
-   
- }
-// type Props = {
-//     colors:{
-
-//     }
-// }
-const Priority = ()=>{
-    return(
-        <div>
-            <h1>{}</h1>
-        </div>
+const Priority = (props: Props) => {
+    return (
+        <span className="rounded px-2 py-1 my-auto mx-3 align-middle" style={{backgroundColor: theme[props.priority].background, fontSize: '12px', color: theme[props.priority].color}}>
+            {theme[props.priority].title}
+        </span>
     )
 }
 

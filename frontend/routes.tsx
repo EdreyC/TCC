@@ -26,7 +26,7 @@ export default function MainRoutes() {
           </div >
         </>
       } />
-      <Route path="/board" element={
+      <Route path="/board/:id" element={
         <>
           <Navbar />
           <div className="d-flex" style={{ position: "relative", height: "100%" }}>
