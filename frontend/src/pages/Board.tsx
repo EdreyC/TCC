@@ -3,21 +3,13 @@ import { Card, Container, Dropdown, ListGroup, ListGroupItem, Modal } from "reac
 import { useAuth } from "../hooks/useAuth";
 
 import CardKanban from "../components/CardKanban";
-import Priority from "../components/Priority";
 import { task } from "../models/Task";
 import { useParams } from "react-router-dom";
-
-type task_type = {
-    name: string,
-    priority: number,
-    description: string,
-    comments: { user: string, text: string }[]
-}
 
 export default function Board() {
     const params:any = useParams();
 
-    console.log(params);
+    console.log(params.id);
 
     const [tasksToDo, setTasksToDo] = useState<task[]>([]);
     const [tasksDoing, setTasksDoing] = useState<task[]>([]);

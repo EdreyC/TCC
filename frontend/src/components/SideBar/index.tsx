@@ -11,9 +11,8 @@ import { db } from '../../services/firebase';
 type Data = {
     name: string;
     owner: string
-  }
+}
   
-
 const SideBar = () => {
     const [collapsed, setCollapsed] = useState(true);
   const [data, setData] = useState<Data[]>([]);
@@ -48,7 +47,7 @@ const SideBar = () => {
                     <SubMenu title="Board" icon={<HiViewBoards />}>
                         {
                             data.map(item=>(
-                                <MenuItem><Link to='/board'>{item.name}</Link></MenuItem>
+                                <MenuItem key={item.name}><Link to={'/board/' + item.name}>{item.name}</Link></MenuItem>
                             ))
                         }
                     </SubMenu>
@@ -59,4 +58,5 @@ const SideBar = () => {
         </ProSidebar>
     )
 }
+
 export default SideBar;
