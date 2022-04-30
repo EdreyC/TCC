@@ -5,6 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 import CardKanban from "../components/CardKanban";
 import Priority from "../components/Priority";
 import { task } from "../models/Task";
+import { useParams } from "react-router-dom";
 
 type task_type = {
     name: string,
@@ -13,24 +14,15 @@ type task_type = {
     comments: { user: string, text: string }[]
 }
 
-export default function Board(props: task) {
+export default function Board() {
+    const params:any = useParams();
 
-    const { user } = useAuth()
-    const [show, setShow] = useState(false);
-    const [task, setTask] = useState<task_type>({
-        name: "NAME",
-        priority: 1,
-        description: "LOREM IPSUM DSADSFNDSJFBDSHFBDK SNFSKFJSAKBDSAJDNKASLNDKASNDKSAD",
-        comments: [{ user: "nomeuser", text: "asfnsjffasdbjada" }]
-    });
-    const [tasksToDo, setTasksToDo] = useState<task_type[]>([]);
-    const [tasksDoing, setTasksDoing] = useState<task_type[]>([]);
-    const [tasksReview, setTasksReview] = useState<task_type[]>([]);
-    const [tasksDone, setTasksDone] = useState<task_type[]>([]);
+    console.log(params);
 
-    const addTask = (type: number) => {
-
-    }
+    const [tasksToDo, setTasksToDo] = useState<task[]>([]);
+    const [tasksDoing, setTasksDoing] = useState<task[]>([]);
+    const [tasksReview, setTasksReview] = useState<task[]>([]);
+    const [tasksDone, setTasksDone] = useState<task[]>([]);
 
     return (
         <Container fluid className="" style={{ marginTop: '8rem'}}>
