@@ -9,21 +9,34 @@ import { addDoc, arrayUnion, collection, getDocs, query, QueryDocumentSnapshot, 
 import { useAuth } from "../hooks/useAuth";
 
 type Data = {
+  id:string;
   name: string;
   owner: string
+}
+type Task={
+  name:string;
+  description:string
 }
 
 export default function Home() {
   const { user } = useAuth()
 
   const [name, setName] = useState("");
-  const navigate = useNavigate();
-  const [data, setData] = useState<Data[]>([]);
-
+  // const navigate = useNavigate();
+  const [dataProjetc, setDataProject] = useState<Data[]>([]);
+  const [dataTask, setDataTask] = useState<Task[]>([]);
+  
   const PostData = async () => {
+    //  await addDoc(collection(db,"Tasks"),{
+    //   name:taskName,
+    //   description:taskDescription
+    // })
     await addDoc(collection(db, "Projects"), {
+
+      Task:[], //  NOME DA COLEÇÃO/ID DO DOCUMENTO PRA REFERÊNCIAR
       name: name,
       owner: user?.name,
+      
     });
     // window.location.reload();
 
@@ -34,8 +47,9 @@ export default function Home() {
     // console.log(datadocs.docs.map((doc) => ({ ...doc.data()})))
     // setData(datadocs.docs.map(item =>{item.data()}))
     // console.log(datadocs.docs);
-    setData(datadocs.docs.map(item => item.data() as Data));
-    console.log(data);
+    setDataProject(datadocs.docs.map((item) => ( {...item.data() as Data })));
+
+    console.log(dataProjetc);
   }
 
   useEffect(() => {
@@ -50,10 +64,10 @@ export default function Home() {
       </div>
       <div className="d-flex justify-content-center align-items-center border border-2 border-secondary flex-column gap-4 rounded p-3">
         {
-          data.length == 0 ? <h2>Create your first task above ☝</h2> :
+          dataProjetc.length == 0 ? <h2>Create your first task above ☝</h2> :
             <div className="d-flex justify-content-center align-items-center  flex-column gap-4 rounded p-3">
               {
-                data.map(item => (
+                dataProjetc.map(item => (
                   <Task NameProjectAndTask={item.name + "/nomedatask"} time="Expira em algumas horas" />
                 ))
               }
