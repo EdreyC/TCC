@@ -33,7 +33,7 @@ export default function Home() {
     // })
     await addDoc(collection(db, "Projects"), {
 
-      Task:[], //  NOME DA COLEÇÃO/ID DO DOCUMENTO PRA REFERÊNCIAR
+      Task:["Tasks/wPavHvNw668LweCBlQe8"], //  NOME DA COLEÇÃO/ID DO DOCUMENTO PRA REFERÊNCIAR
       name: name,
       owner: user?.name,
       
@@ -64,12 +64,17 @@ export default function Home() {
       </div>
       <div className="d-flex justify-content-center align-items-center border border-2 border-secondary flex-column gap-4 rounded p-3">
         {
-          dataProjetc.length == 0 ? <h2>Create your first task above ☝</h2> :
+          dataProjetc.length == 0 ? <h2>Crie o seu primeiro projeto☝</h2> :
             <div className="d-flex justify-content-center align-items-center  flex-column gap-4 rounded p-3">
               {
-                dataProjetc.map(item => (
-                  <Task NameProjectAndTask={item.name + "/nomedatask"} time="Expira em algumas horas" />
-                ))
+                dataProjetc.map(item => {
+                  item.owner === user?.name? (
+               
+                    <Task NameProjectAndTask={item.name + "/nomedatask"} time="Expira em algumas horas" />
+                 
+                    
+                  ):(<h1>AAAAA</h1>)
+                })
               }
             </div>
         }

@@ -4,19 +4,21 @@ import { Card, Container, ListGroup, ListGroupItem, Modal } from "react-bootstra
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsTextLeft } from "react-icons/bs";
 import { FaComments } from "react-icons/fa";
-import { task } from "../../models/Task";
+import { task, Comment } from "../../models/Task";
 import Button from "../Button";
-import { Timestamp } from "firebase/firestore";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
 import Priority from "../Priority";
+import { db } from "../../services/firebase";
 
 type Props = {
     title: string;
     tasks: task[];
 }
 
+
 const CardKanban = (props: Props) => {
     const [task, setTask] = useState<task>();
-    const [comment, setComment] = useState("Add your comment...");
+    const [Comment, setComment] = useState<Comment>({});
 
     const [show, setShow] = useState(false);
     const [showInputTitle, setShowInputTitle] = useState(false);
@@ -31,11 +33,10 @@ const CardKanban = (props: Props) => {
         setShow(!show);
         let date = new Date().getUTCSeconds()
         setTask({
-            id: "",
             name: "",
             priority: "",
             description: "",
-            comments: [{ uid: "", text: "", date: new Timestamp(date, date * 1000) }],
+            comments: [Comment],
             date: new Timestamp(date, date * 1000),
             uid: "",
             tags: [],
@@ -44,6 +45,17 @@ const CardKanban = (props: Props) => {
             project: ""
         });
     }
+
+    const PostTask = async () => {
+        await addDoc(collection(db, "Tasks"), {
+            name: task?.name,
+            priority: task?.priority,
+            description: task?.description,
+            comments: task?.comments,
+        });
+        // window.location.reload();
+    
+      }
 
     const handleName = () => {
         setShowInputTitle(!showInputTitle);
@@ -69,7 +81,7 @@ const CardKanban = (props: Props) => {
                 </Card.Footer>
             </Card>
             {task &&
-                <Modal show={show} onHide={(e) => setShow(false)} centered>
+                <Modal show={show} onHide={() => setShow(false)} centered>
                     <Modal.Header closeButton>
                         <Modal.Title>
                             {showInputTitle &&
@@ -115,11 +127,11 @@ const CardKanban = (props: Props) => {
                     </Modal.Body>
                     <Modal.Footer className="justify-content-center" data-color-mode="light">
                         <MDEditor
-                            value={comment}
-                            onChange={setComment}
+                            value={Comment}
+                            onChange={e=>setComment(e.target.value)}
                             preview={'edit'}
                         />
-                        <Button>Adicionar</Button>
+                        <Button onClick={() => PostTask()}>Adicionar</Button>
                     </Modal.Footer>
                 </Modal>
             }

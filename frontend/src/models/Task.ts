@@ -1,12 +1,11 @@
 import { Timestamp } from "firebase/firestore";
 
 export type task = {
-  id: string;
-  name: string;
-  priority: string;
-  description: string;
-  comments: { text: string; date: Timestamp; uid: string }[];
-  date: Timestamp;
+  name?: string | undefined;
+  priority?: string;
+  description?: string | undefined;
+  comments: Comment[];
+  date?: Timestamp;
   uid: string;
   tags: string[];
   userAssigned: string;
@@ -14,3 +13,9 @@ export type task = {
   project: string;
 };
 
+
+export type Comment={
+  text: string;
+  date: Timestamp;
+  uid: string 
+}
