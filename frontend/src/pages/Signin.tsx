@@ -65,6 +65,7 @@ export default function Signin() {
               <Button padding={"0.5rem"} onClick={() => SignInWithEmailAndPassword()}>Sign In</Button>
               <Button padding={"0.5rem"} backgroundcolor='#db3236' onClick={() => SignInWithGoogle()}><BsGoogle />Sign in with google </Button>
             </div>
+            <br />
             <span>Don't have an account? <Link to="/signup">Sign Up</Link> </span>
           </div>
         </Col>

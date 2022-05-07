@@ -32,7 +32,7 @@ const SideBar = () => {
       }, [])
 
     return (
-        <ProSidebar collapsed={collapsed}>
+        <ProSidebar collapsed={collapsed} className="fixed-left">
             <SidebarHeader >
                 {collapsed &&
                     <MenuItem className='text-center' onClick={(e) => setCollapsed(!collapsed)}><AiOutlineRight /></MenuItem>
@@ -54,6 +54,7 @@ const SideBar = () => {
                 </Menu>
             </SidebarContent>
             <SidebarFooter>
+                
             </SidebarFooter>
         </ProSidebar>
     )
