@@ -25,13 +25,13 @@ export default function MainRoutes() {
       } />
       <Route path="/board/:id" element={
         user &&
-        <>
-          <Navbar />
-          <div className="d-flex" style={{ position: "relative", height: "100%" }}>
-            <SideBar />
+        <div className="d-flex">
+          <SideBar />
+          <div className="w-100 justify-content-center flex-column align-items-center">
+            <Navbar />
             <Board />
-          </div >
-        </>
+          </div>
+        </div>
       } />
       <Route path="/signin" element={<Signin />} />
       <Route path="/signup" element={<Signup />} />
