@@ -6,7 +6,7 @@ import { BsTextLeft } from "react-icons/bs";
 import { FaComments } from "react-icons/fa";
 import { task, Comment } from "../../models/Task";
 import Button from "../Button";
-import { Timestamp, addDoc, collection } from "firebase/firestore";
+import { Timestamp, addDoc, collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import Priority from "../Priority";
 import { db } from "../../services/firebase";
 
@@ -55,7 +55,23 @@ const CardKanban = (props: Props) => {
         });
         // window.location.reload();
     
-      }
+    }
+
+    const DeleteTask = async () => {
+        await deleteDoc(doc(db, "Tasks"))
+    }
+
+    const UpdateTask = async () => {
+        const taskUpdate = doc(db, "Tasks");
+
+        await updateDoc(taskUpdate, {
+            name: true,
+            priority: true,
+            description: true,
+            comments: true
+        })
+    }
+    
 
     const handleName = () => {
         setShowInputTitle(!showInputTitle);
