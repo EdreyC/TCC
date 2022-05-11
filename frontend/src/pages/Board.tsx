@@ -4,14 +4,21 @@ import { Container } from "react-bootstrap";
 import CardKanban from "../components/CardKanban";
 import { task } from "../models/Task";
 import { useParams } from "react-router-dom";
+import { collection, getDocs, query } from "firebase/firestore";
+import { db } from "../services/firebase";
 
 export default function Board() {
     const params: any = useParams();
 
     console.log(params.id);
 
+    async function getTasks() {
+        const tasks = query(collection(db, "Tasks"));
+        // tasks.where()
+    }
+
     useEffect(() => {
-        
+
     }, [])
 
     const [tasksToDo, setTasksToDo] = useState<task[]>([]);
