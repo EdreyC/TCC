@@ -4,7 +4,7 @@ export type task = {
   name?: string | undefined;
   priority?: string;
   description?: string | undefined;
-  comments: Comment[];
+  comments: comment[];
   date?: Timestamp;
   uid: string;
   tags: string[];
@@ -13,9 +13,16 @@ export type task = {
   project: string;
 };
 
+export type postTask = {
+  name?: string;
+  priority: string;
+  description?: string;
+  comments?: comment[];
+  status?: string;
+};
 
-export type Comment={
+export type comment = {
   text: string;
   date: Timestamp;
-  uid: string 
+  uid: string
 }

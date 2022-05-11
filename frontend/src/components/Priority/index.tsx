@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const theme = {
     DoNow: {
         background: "#DF2B4B",
@@ -24,12 +22,13 @@ const theme = {
 }
 
 type Props = {
-    priority: string
+    priority: string;
+    onClick?: () => void;
 }
 
 const Priority = (props: Props) => {
     return (
-        <span className="rounded px-2 py-1 my-auto mx-3 align-middle" style={{backgroundColor: theme[props.priority].background, fontSize: '12px', color: theme[props.priority].color}}>
+        <span {...props} className="rounded px-2 py-1 my-auto mx-3 align-middle" style={{backgroundColor: theme[props.priority].background, fontSize: '12px', color: theme[props.priority].color, cursor: 'pointer'}}>
             {theme[props.priority].title}
         </span>
     )
