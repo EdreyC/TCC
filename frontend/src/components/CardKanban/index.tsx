@@ -4,9 +4,9 @@ import { Card, Container, ListGroup, ListGroupItem, Modal } from "react-bootstra
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsTextLeft } from "react-icons/bs";
 import { FaComments } from "react-icons/fa";
-import { task, comment, postTask } from "../../models/Task";
+import { task, postTask } from "../../models/Task";
 import Button from "../Button";
-import { Timestamp, addDoc, collection, deleteDoc, doc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import Priority from "../Priority";
 import { db } from "../../services/firebase";
 import swal from "sweetalert";
@@ -14,6 +14,7 @@ import swal from "sweetalert";
 type Props = {
     title: string;
     tasks: task[];
+    project: string;
 }
 
 const CardKanban = (props: Props) => {
@@ -47,11 +48,17 @@ const CardKanban = (props: Props) => {
             status: task?.status
         })
             .then(() =>
-                swal("Parabéns"))
+                swal({
+                    icon: 'success',
+                    title: 'Task created',
+                    text: 'Congratulations! Your task has been created.',
+                }))
             .catch(() =>
-                swal("Error"));
-        // window.location.reload();
-
+                swal({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error! Please try again.',
+                }));
     }
 
     const DeleteTask = async () => {
@@ -70,11 +77,15 @@ const CardKanban = (props: Props) => {
     }
 
     const handleName = () => {
-        setShowInputTitle(!showInputTitle);
+        setShowInputTitle(!showInputTitle).then(() => {
+            document.getElementById("task-title").focus();
+        });
     }
 
     const handleDescription = () => {
-        setShowInputDescription(!showInputDescription);
+        setShowInputDescription(!showInputDescription).then(() => {
+            document.getElementById("task-description").focus();
+        });
     }
 
     const handlePriority = (oldPriority: string) => {
@@ -120,17 +131,18 @@ const CardKanban = (props: Props) => {
                     <Modal.Header closeButton>
                         <Modal.Title>
                             {showInputTitle &&
-                                <input type="text" value={task.name} onChange={(e) => setTask({
-                                    name: e.target.value,
-                                    priority: task.priority,
-                                    description: task.description,
-                                    comments: task.comments,
-                                    status: task.status,
-                                })} onBlur={(e) => handleName()} />
+                                <input id="task-title" className="input-tasks" type="text" placeholder="Add your title..."
+                                    value={task.name} onChange={(e) => setTask({
+                                        name: e.target.value,
+                                        priority: task.priority,
+                                        description: task.description,
+                                        comments: task.comments,
+                                        status: task.status,
+                                    })} onBlur={(e) => setShowInputTitle(!showInputTitle)} />
                             }
                             {!showInputTitle &&
                                 <h2 className='text-center align-middle' >
-                                    <strong onClick={(e) => setShowInputTitle(!showInputTitle)}>{task.name}</strong>
+                                    <strong onClick={(e) => handleName()}>{task.name}</strong>
                                     <Priority priority={task.priority} onClick={() => handlePriority(task.priority)} />
                                 </h2>
                             }
@@ -142,16 +154,17 @@ const CardKanban = (props: Props) => {
                                 <ListGroupItem className="bg-transparent text-muted text-start mb-4">
                                     <h4><BsTextLeft /> Description</h4>
                                     {showInputDescription &&
-                                        <input type="text" value={task.description} onChange={(e) => setTask({
-                                            name: task.name,
-                                            priority: task.priority,
-                                            description: e.target.value,
-                                            comments: task.comments,
-                                            status: task.status,
-                                        })} onBlur={(e) => setShowInputDescription(!showInputDescription)} />
+                                        <input id="task-description" className="input-tasks" type="text" placeholder="Add your description..."
+                                            value={task.description} onChange={(e) => setTask({
+                                                name: task.name,
+                                                priority: task.priority,
+                                                description: e.target.value,
+                                                comments: task.comments,
+                                                status: task.status,
+                                            })} onBlur={(e) => setShowInputDescription(!showInputDescription)} />
                                     }
                                     {!showInputDescription &&
-                                        <p className='text-center' onClick={(e) => setShowInputDescription(!showInputDescription)}>
+                                        <p className='text-center' onClick={(e) => handleDescription()}>
                                             {task.description}
                                         </p>
                                     }
