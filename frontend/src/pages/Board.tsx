@@ -29,10 +29,10 @@ export default function Board() {
     return (
         <Container fluid className="" style={{ marginTop: '8rem' }}>
             <div className="row justify-content-center align-items-center">
-                <CardKanban title="To do" tasks={tasksToDo} />
-                <CardKanban title="Doing" tasks={tasksDoing} />
-                <CardKanban title="Review" tasks={tasksReview} />
-                <CardKanban title="Done" tasks={tasksDone} />
+                <CardKanban title="To do" tasks={tasksToDo} project={params.id} />
+                <CardKanban title="Doing" tasks={tasksDoing} project={params.id} />
+                <CardKanban title="Review" tasks={tasksReview} project={params.id} />
+                <CardKanban title="Done" tasks={tasksDone} project={params.id} />
             </div>
         </Container>
     )

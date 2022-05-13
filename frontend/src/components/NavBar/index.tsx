@@ -7,8 +7,8 @@ const NavBar = () => {
 
   return (
     <nav className="navbar align-items-center justify-content-end px-4">
+      <h1 className="fs-6 fw-medium">{user?.name}</h1>
       <LongMenu />
-      <h1 className="fs-5 fw-medium">{user?.name}</h1>
     </nav>
   )
 }

@@ -1,6 +1,9 @@
+import Priority from "../Priority";
+
 type Props = {
     NameProjectAndTask: string;
     time?: string;
+    priority?: string;
 }
 
 const Task = (props: Props) => {
@@ -12,9 +15,7 @@ const Task = (props: Props) => {
             <span style={{ fontWeight: 600 }}>
                 {props.time}
             </span>
-            <div className="bg-danger text-white rounded py-1 px-4" style={{ fontWeight: 600 }}>
-                Do Now
-            </div>
+            <Priority priority={props.priority} />
         </div>
     )
 }

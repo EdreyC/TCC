@@ -6,7 +6,6 @@ import Signup from "./src/pages/Signup";
 import Board from "./src/pages/Board";
 import Navbar from "./src/components/NavBar";
 import SideBar from "./src/components/SideBar";
-import { Container } from "react-bootstrap";
 
 export default function MainRoutes() {
   const { user } = useAuth();
