@@ -78,46 +78,26 @@ const CardKanban = (props: Props) => {
     }
 
     const handlePriority = (oldPriority: string) => {
+
+        var ptask: postTask = {
+            name: task.name,
+            priority: "Low",
+            description: task.description,
+            comments: task.comments,
+            status: task.status,
+        };
         if (oldPriority === "Low")
-            setTask({
-                name: task.name,
-                priority: "Medium",
-                description: task.description,
-                comments: task.comments,
-                status: task.status,
-            })
-        else if (oldPriority === "Medium")
-            setTask({
-                name: task.name,
-                priority: "High",
-                description: task.description,
-                comments: task.comments,
-                status: task.status,
-            })
+            ptask.priority = "Medium"
+        else if (oldPriority === "Medium") {
+            ptask.priority = "High";
+        }
         else if (oldPriority === "High")
-            setTask({
-                name: task.name,
-                priority: "DoNow",
-                description: task.description,
-                comments: task.comments,
-                status: task.status,
-            })
+            ptask.priority = "DoNow"
         else if (oldPriority === "DoNow")
-            setTask({
-                name: task.name,
-                priority: "Low",
-                description: task.description,
-                comments: task.comments,
-                status: task.status,
-            })
+            ptask.priority = "Low"
         else
-            setTask({
-                name: task.name,
-                priority: "Low",
-                description: task.description,
-                comments: task.comments,
-                status: task.status,
-            })
+            ptask.priority = "Low"
+        setTask(ptask)
     }
 
     return (
