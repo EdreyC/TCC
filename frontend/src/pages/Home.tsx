@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { BsPlus } from "react-icons/bs"
 import { db } from "../services/firebase";
 import Button from './../components/Button/index';
-import Task, { NoTask } from "../components/Task";
-import { addDoc, arrayUnion, collection, getDocs, query, QueryDocumentSnapshot, where } from "firebase/firestore";
+import Task from "../components/Task";
+import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
+import swal from "sweetalert";
 
 type Data = {
   id: string;
@@ -21,7 +22,6 @@ export default function Home() {
   const { user } = useAuth();
 
   const [name, setName] = useState("");
-  // const navigate = useNavigate();
   const [dataProjetc, setDataProject] = useState<Data[]>([]);
   const [dataTask, setDataTask] = useState<Task[]>([]);
 
@@ -49,6 +49,27 @@ export default function Home() {
     // console.log(dataProjetc);
   }
 
+  const PostData = async () => {
+    await addDoc(collection(db, "Projects"), {
+      Task: [],
+      name: name,
+      owner: user?.name,
+    })
+      .then(() =>
+        swal({
+          icon: 'success',
+          title: 'Task created',
+          text: 'Congratulations! Your task has been created.',
+        }))
+      .catch(() =>
+        swal({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error! Please try again.',
+        }));
+    getData();
+  };
+
   useEffect(() => {
     getData();
   }, [])
@@ -67,7 +88,7 @@ export default function Home() {
                 dataProjetc.map(item => (
                   <>
                     <p>{item.id}</p>
-                    <Task key={item.name} NameProjectAndTask={item.name + "/nomedatask"} time="Expira em algumas horas" />
+                    <Task key={item.name} NameProjectAndTask={item.name + "/nomedatask"} priority='Medium' time="Expira em algumas horas" />
                   </>
                 ))
               }

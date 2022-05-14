@@ -5,7 +5,8 @@ import CardKanban from "../components/CardKanban";
 import { task } from "../models/Task";
 import { useParams } from "react-router-dom";
 import { collection, getDocs, query } from "firebase/firestore";
-import { db } from "../services/firebase";
+import { db  } from "../services/firebase";
+import { where } from 'firebase/firestore'
 
 export default function Board() {
     const params: any = useParams();
@@ -13,8 +14,7 @@ export default function Board() {
     console.log(params.id);
 
     async function getTasks() {
-        const tasks = query(collection(db, "Tasks"));
-        // tasks.where()
+        return query(collection(db, "Tasks"), where('project', '==', params.id));     
     }
 
     useEffect(() => {
@@ -29,10 +29,10 @@ export default function Board() {
     return (
         <Container fluid className="" style={{ marginTop: '8rem' }}>
             <div className="row justify-content-center align-items-center">
-                <CardKanban title="To do" tasks={tasksToDo} />
-                <CardKanban title="Doing" tasks={tasksDoing} />
-                <CardKanban title="Review" tasks={tasksReview} />
-                <CardKanban title="Done" tasks={tasksDone} />
+                <CardKanban title="To do" tasks={tasksToDo} project={params.id} />
+                <CardKanban title="Doing" tasks={tasksDoing} project={params.id} />
+                <CardKanban title="Review" tasks={tasksReview} project={params.id} />
+                <CardKanban title="Done" tasks={tasksDone} project={params.id} />
             </div>
         </Container>
     )

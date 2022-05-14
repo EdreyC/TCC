@@ -46,7 +46,7 @@ export default function LongMenu() {
         onClick={(e) => setAnchorEl(e.currentTarget)}
       >
         {/* <MoreVertIcon /> */}
-        <img style={{ width: 70, height: 70 }} className="rounded-circle" src={user?.avatar} alt="" />
+        <img style={{ width: 50, height: 50 }} className="rounded-circle" src={user?.avatar} alt="" />
       </IconButton>
       <Menu
         id="long-menu"
