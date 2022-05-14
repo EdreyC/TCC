@@ -1,15 +1,19 @@
 import MDEditor from "@uiw/react-md-editor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Container, ListGroup, ListGroupItem, Modal } from "react-bootstrap";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsTextLeft } from "react-icons/bs";
 import { FaComments } from "react-icons/fa";
 import { task, postTask } from "../../models/Task";
 import Button from "../Button";
+<<<<<<< HEAD
+=======
 import { addDoc, collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
+>>>>>>> 87a501e31e0517be2b525ecaa38a1546f86c0067
 import Priority from "../Priority";
 import { db } from "../../services/firebase";
 import swal from "sweetalert";
+import { addDoc, arrayUnion, collection, deleteDoc, doc, getDocs, query, QueryDocumentSnapshot, updateDoc, where } from "firebase/firestore";
 
 type Props = {
     title: string;
@@ -19,12 +23,27 @@ type Props = {
 
 const CardKanban = (props: Props) => {
     const [task, setTask] = useState<postTask>();
-
+    const [dataId, setDataId] = useState("");
     const [show, setShow] = useState(false);
     const [showInputTitle, setShowInputTitle] = useState(false);
     const [showInputDescription, setShowInputDescription] = useState(false);
-
     const [comment, setComment] = useState("");
+
+    async function getData() {
+        const q = query(collection(db, "Tasks"));
+        const datadocs = await getDocs(q);
+        // console.log(datadocs.docs.map((doc) => ({ ...doc.data()})))
+        // setData(datadocs.docs.map(item =>{item.data()}))
+        // console.log(datadocs.docs);
+
+        setDataId(datadocs.docs[0].id);
+       console.log(dataId)
+    }
+    
+      useEffect(() => {
+        getData();
+      }, [])
+
 
     const addTask = () => {
         setShowInputTitle(true);
@@ -62,11 +81,11 @@ const CardKanban = (props: Props) => {
     }
 
     const DeleteTask = async () => {
-        await deleteDoc(doc(db, "Tasks"))
+        await deleteDoc(doc(db, "Tasks",))
     }
 
     const UpdateTask = async () => {
-        const taskUpdate = doc(db, "Tasks");
+        const taskUpdate = doc(db, "Tasks", dataId);
 
         await updateDoc(taskUpdate, {
             name: task.name,
@@ -89,46 +108,26 @@ const CardKanban = (props: Props) => {
     }
 
     const handlePriority = (oldPriority: string) => {
+
+        var ptask: postTask = {
+            name: task.name,
+            priority: "Low",
+            description: task.description,
+            comments: task.comments,
+            status: task.status,
+        };
         if (oldPriority === "Low")
-            setTask({
-                name: task.name,
-                priority: "Medium",
-                description: task.description,
-                comments: task.comments,
-                status: task.status,
-            })
-        else if (oldPriority === "Medium")
-            setTask({
-                name: task.name,
-                priority: "High",
-                description: task.description,
-                comments: task.comments,
-                status: task.status,
-            })
+            ptask.priority = "Medium"
+        else if (oldPriority === "Medium") {
+            ptask.priority = "High";
+        }
         else if (oldPriority === "High")
-            setTask({
-                name: task.name,
-                priority: "DoNow",
-                description: task.description,
-                comments: task.comments,
-                status: task.status,
-            })
+            ptask.priority = "DoNow"
         else if (oldPriority === "DoNow")
-            setTask({
-                name: task.name,
-                priority: "Low",
-                description: task.description,
-                comments: task.comments,
-                status: task.status,
-            })
+            ptask.priority = "Low"
         else
-            setTask({
-                name: task.name,
-                priority: "Low",
-                description: task.description,
-                comments: task.comments,
-                status: task.status,
-            })
+            ptask.priority = "Low"
+        setTask(ptask)
     }
 
     return (
