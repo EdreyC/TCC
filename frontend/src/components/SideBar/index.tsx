@@ -9,6 +9,7 @@ import { query, collection, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 
 type Data = {
+    id:string;
     name: string;
     owner: string
 }
@@ -16,6 +17,7 @@ type Data = {
 const SideBar = () => {
     const [collapsed, setCollapsed] = useState(true);
   const [data, setData] = useState<Data[]>([]);
+  const [dataId,setDataId] = useState([]);
 
     async function getData() {
         const q = query(collection(db, "Projects"));
@@ -24,7 +26,10 @@ const SideBar = () => {
         // setData(datadocs.docs.map(item =>{item.data()}))
         // console.log(datadocs.docs);
         setData(datadocs.docs.map(item => item.data() as Data));
-        console.log(data);
+        let idArrays = [];
+        idArrays =datadocs.docs.map(item=>{item.id}); 
+        setDataId(idArrays)
+
       }
     
       useEffect(() => {
@@ -47,7 +52,7 @@ const SideBar = () => {
                     <SubMenu title="Board" icon={<HiViewBoards />}>
                         {
                             data.map(item=>(
-                                <MenuItem key={item.name}><Link to={'/board/' + item.name}>{item.name}</Link></MenuItem>
+                                <MenuItem key={item.name}><Link to={'/board/' + dataId}>{item.name}</Link></MenuItem>
                             ))
                         }
                     </SubMenu>

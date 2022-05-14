@@ -31,7 +31,7 @@ export default function Home() {
     //   description:taskDescription
     // })
     await addDoc(collection(db, "Projects"), {
-      Task:["Tasks/wPavHvNw668LweCBlQe8"], //  NOME DA COLEÇÃO/ID DO DOCUMENTO PRA REFERÊNCIAR
+
       name: name,
       owner: user?.name,
     });

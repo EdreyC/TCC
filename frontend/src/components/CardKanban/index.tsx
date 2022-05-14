@@ -1,15 +1,15 @@
 import MDEditor from "@uiw/react-md-editor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Container, ListGroup, ListGroupItem, Modal } from "react-bootstrap";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsTextLeft } from "react-icons/bs";
 import { FaComments } from "react-icons/fa";
 import { task, comment, postTask } from "../../models/Task";
 import Button from "../Button";
-import { Timestamp, addDoc, collection, deleteDoc, doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import Priority from "../Priority";
 import { db } from "../../services/firebase";
 import swal from "sweetalert";
+import { addDoc, arrayUnion, collection, deleteDoc, doc, getDocs, query, QueryDocumentSnapshot, updateDoc, where } from "firebase/firestore";
 
 type Props = {
     title: string;
@@ -18,12 +18,27 @@ type Props = {
 
 const CardKanban = (props: Props) => {
     const [task, setTask] = useState<postTask>();
-
+    const [dataId, setDataId] = useState("");
     const [show, setShow] = useState(false);
     const [showInputTitle, setShowInputTitle] = useState(false);
     const [showInputDescription, setShowInputDescription] = useState(false);
-
     const [comment, setComment] = useState("");
+
+    async function getData() {
+        const q = query(collection(db, "Tasks"));
+        const datadocs = await getDocs(q);
+        // console.log(datadocs.docs.map((doc) => ({ ...doc.data()})))
+        // setData(datadocs.docs.map(item =>{item.data()}))
+        // console.log(datadocs.docs);
+
+        setDataId(datadocs.docs[0].id);
+       console.log(dataId)
+    }
+    
+      useEffect(() => {
+        getData();
+      }, [])
+
 
     const addTask = () => {
         setShowInputTitle(true);
@@ -55,11 +70,11 @@ const CardKanban = (props: Props) => {
     }
 
     const DeleteTask = async () => {
-        await deleteDoc(doc(db, "Tasks"))
+        await deleteDoc(doc(db, "Tasks",))
     }
 
     const UpdateTask = async () => {
-        const taskUpdate = doc(db, "Tasks");
+        const taskUpdate = doc(db, "Tasks", dataId);
 
         await updateDoc(taskUpdate, {
             name: task.name,
@@ -151,7 +166,7 @@ const CardKanban = (props: Props) => {
                             {!showInputTitle &&
                                 <h2 className='text-center align-middle' >
                                     <strong onClick={(e) => setShowInputTitle(!showInputTitle)}>{task.name}</strong>
-                                    <Priority priority={task.priority} onClick={() => handlePriority(task.priority)} />
+                                    {/* <Priority priority={task.priority} onClick={() => handlePriority(task.priority)} /> */}
                                 </h2>
                             }
                         </Modal.Title>
@@ -195,7 +210,7 @@ const CardKanban = (props: Props) => {
                     <Modal.Footer className="justify-content-center" data-color-mode="light">
                         <MDEditor
                             value={comment}
-                            onChange={setComment}
+                            // onChange={setComment}
                             preview={'edit'}
                         />
                         <Button onClick={() => PostTask()}>Adicionar</Button>
