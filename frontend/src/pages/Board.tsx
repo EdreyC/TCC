@@ -29,8 +29,36 @@ export default function Board() {
     const [tasksReview, setTasksReview] = useState<task[]>([]);
     const [tasksDone, setTasksDone] = useState<task[]>([]);
 
+    async function getTasks() {
+        let tasks: task[];
+        let tasksToDoTemp: task[];
+        let tasksDoingTemp: task[];
+        let tasksReviewTemp: task[];
+        let tasksDoneTemp: task[];
+
+        console.log(query(collection(db, "Tasks"), where('project', '==', params.id)))
+
+        if (tasks.status === "To Do") {
+            tasksToDoTemp.push();
+        }
+        else if (tasks.status === "Doing") {
+            tasksDoingTemp.push();
+        }
+        else if (tasks.status === "Review") {
+            tasksReviewTemp.push();
+        }
+        else if (tasks.status === "Done") {
+            tasksDoneTemp.push();
+        }
+        // return 
+    }
+
+    useEffect(() => {
+        getTasks();
+    }, [])
+
     return (
-        <Container fluid className="" style={{ marginTop: '8rem' }}>
+        <Container fluid className="mt-5">
             <div className="row justify-content-center align-items-center">
                 <CardKanban title="To do" tasks={tasksToDo} project={params.id} />
                 <CardKanban title="Doing" tasks={tasksDoing} project={params.id} />

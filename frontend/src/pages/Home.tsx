@@ -72,11 +72,11 @@ export default function Home() {
           dataProjetc.length == 0 ? <h2>Create your first task above ☝</h2> :
             <div className="rounded p-3">
               {
-                dataProjetc.map(item => (
-                  <>
+                dataProjetc.map((item, index) => (
+                  <div key={index}>
                     <p>{item.id}</p>
-                    <Task key={item.name} NameProjectAndTask={item.name + "/nomedatask"} priority='Medium' time="Expira em algumas horas" />
-                  </>
+                    <Task NameProjectAndTask={item.name + "/nomedatask"} priority='Medium' time="Expira em algumas horas" />
+                  </div>
                 ))
               }
             </div>
