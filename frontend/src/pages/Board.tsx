@@ -13,13 +13,6 @@ export default function Board() {
 
     console.log(params.id);
 
-    async function getTasks() {
-        const q = query(collection(db, "Tasks"), where('project', '==', params.id));
-        const tasks = await getDocs(q)
-        
-        return await getDocs(q);
-    }
-
     useEffect(() => {
 
     }, [])
@@ -30,13 +23,13 @@ export default function Board() {
     const [tasksDone, setTasksDone] = useState<task[]>([]);
 
     async function getTasks() {
-        let tasks: task[];
         let tasksToDoTemp: task[];
         let tasksDoingTemp: task[];
         let tasksReviewTemp: task[];
         let tasksDoneTemp: task[];
-
-        console.log(query(collection(db, "Tasks"), where('project', '==', params.id)))
+        
+        const q = await query(collection(db, "/Tasks"), where('project', '==', params.id));
+        let tasks = (await getDocs(q)).docs;
 
         if (tasks.status === "To Do") {
             tasksToDoTemp.push();
