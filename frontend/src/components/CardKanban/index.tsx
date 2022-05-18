@@ -84,10 +84,10 @@ const CardKanban = (props: Props) => {
         const taskUpdate = doc(db, "Tasks", dataId);
 
         await updateDoc(taskUpdate, {
-            name: task.name,
+            name: task?.name,
             priority: true,
-            description: task.description,
-            status: task.status
+            description: task?.description,
+            status: task?.status
         })
     }
 
@@ -106,11 +106,11 @@ const CardKanban = (props: Props) => {
     const handlePriority = (oldPriority: string) => {
 
         var ptask: postTask = {
-            name: task.name,
+            name: task?.name,
             priority: "Low",
-            description: task.description,
-            comments: task.comments,
-            status: task.status,
+            description: task?.description,
+            comments: task?.comments,
+            status: task?.status,
         };
         if (oldPriority === "Low")
             ptask.priority = "Medium"
