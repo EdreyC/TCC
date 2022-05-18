@@ -25,19 +25,6 @@ export default function Home() {
   const [dataProjetc, setDataProject] = useState<Data[]>([]);
   const [dataTask, setDataTask] = useState<Task[]>([]);
 
-  const PostData = async () => {
-    //  await addDoc(collection(db,"Tasks"),{
-    //   name:taskName,
-    //   description:taskDescription
-    // })
-    await addDoc(collection(db, "Projects"), {
-
-      name: name,
-      owner: user?.name,
-    });
-    // window.location.reload();
-  }
-
   async function getData() {
     const q = query(collection(db, "Projects"));
     const datadocs = await getDocs(q);
