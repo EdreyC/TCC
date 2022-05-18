@@ -6,14 +6,10 @@ import { BsTextLeft } from "react-icons/bs";
 import { FaComments } from "react-icons/fa";
 import { task, postTask } from "../../models/Task";
 import Button from "../Button";
-<<<<<<< HEAD
-=======
-import { addDoc, collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
->>>>>>> 87a501e31e0517be2b525ecaa38a1546f86c0067
 import Priority from "../Priority";
 import { db } from "../../services/firebase";
 import swal from "sweetalert";
-import { addDoc, arrayUnion, collection, deleteDoc, doc, getDocs, query, QueryDocumentSnapshot, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from "firebase/firestore";
 
 type Props = {
     title: string;
@@ -37,12 +33,12 @@ const CardKanban = (props: Props) => {
         // console.log(datadocs.docs);
 
         setDataId(datadocs.docs[0].id);
-       console.log(dataId)
+        console.log(dataId)
     }
-    
-      useEffect(() => {
+
+    useEffect(() => {
         getData();
-      }, [])
+    }, [])
 
 
     const addTask = () => {
@@ -88,10 +84,10 @@ const CardKanban = (props: Props) => {
         const taskUpdate = doc(db, "Tasks", dataId);
 
         await updateDoc(taskUpdate, {
-            name: task.name,
+            name: task?.name,
             priority: true,
-            description: task.description,
-            status: task.status
+            description: task?.description,
+            status: task?.status
         })
     }
 
@@ -110,11 +106,11 @@ const CardKanban = (props: Props) => {
     const handlePriority = (oldPriority: string) => {
 
         var ptask: postTask = {
-            name: task.name,
+            name: task?.name,
             priority: "Low",
-            description: task.description,
-            comments: task.comments,
-            status: task.status,
+            description: task?.description,
+            comments: task?.comments,
+            status: task?.status,
         };
         if (oldPriority === "Low")
             ptask.priority = "Medium"
