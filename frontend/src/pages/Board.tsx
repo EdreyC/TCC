@@ -5,7 +5,7 @@ import CardKanban from "../components/CardKanban";
 import { task } from "../models/Task";
 import { useParams } from "react-router-dom";
 import { collection, getDocs, query } from "firebase/firestore";
-import { db  } from "../services/firebase";
+import { db } from "../services/firebase";
 import { where } from 'firebase/firestore'
 
 export default function Board() {
@@ -14,7 +14,10 @@ export default function Board() {
     console.log(params.id);
 
     async function getTasks() {
-        return query(collection(db, "Tasks"), where('project', '==', params.id));     
+        const q = query(collection(db, "Tasks"), where('project', '==', params.id));
+        const tasks = await getDocs(q)
+        
+        return await getDocs(q);
     }
 
     useEffect(() => {
