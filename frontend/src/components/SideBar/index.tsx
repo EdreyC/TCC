@@ -9,32 +9,28 @@ import { query, collection, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 
 type Data = {
-    id:string;
+    id: string;
     name: string;
     owner: string
 }
-  
+
 const SideBar = () => {
     const [collapsed, setCollapsed] = useState(true);
-  const [data, setData] = useState<Data[]>([]);
-  const [dataId,setDataId] = useState([]);
+    const [data, setData] = useState<Data[]>([]);
+    const [dataId, setDataId] = useState<String[]>([]);
 
     async function getData() {
         const q = query(collection(db, "Projects"));
         const datadocs = await getDocs(q);
-        // console.log(datadocs.docs.map((doc) => ({ ...doc.data()})))
-        // setData(datadocs.docs.map(item =>{item.data()}))
-        // console.log(datadocs.docs);
         setData(datadocs.docs.map(item => item.data() as Data));
-        let idArrays = [];
-        idArrays =datadocs.docs.map(item=>{item.id}); 
+        let idArrays: any[] = [];
+        datadocs.docs.map(item => idArrays.push(item.id));
         setDataId(idArrays)
+    }
 
-      }
-    
-      useEffect(() => {
+    useEffect(() => {
         getData();
-      }, [])
+    }, [])
 
     return (
         <ProSidebar collapsed={collapsed} className="fixed-left">
@@ -51,15 +47,15 @@ const SideBar = () => {
                     <MenuItem icon={<BiHome />}><Link to='/'>Home</Link></MenuItem>
                     <SubMenu title="Board" icon={<HiViewBoards />}>
                         {
-                            data.map(item=>(
-                                <MenuItem key={item.name}><Link to={'/board/' + dataId}>{item.name}</Link></MenuItem>
+                            data.map((item, index) => (
+                                <MenuItem key={index}><Link to={'/board/' + dataId[index]}>{item.name}</Link></MenuItem>
                             ))
                         }
                     </SubMenu>
                 </Menu>
             </SidebarContent>
             <SidebarFooter>
-                
+
             </SidebarFooter>
         </ProSidebar>
     )
