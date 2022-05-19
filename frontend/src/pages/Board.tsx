@@ -22,30 +22,36 @@ export default function Board() {
         let tasksDoingTemp: postTask[] = [];
         let tasksReviewTemp: postTask[] = [];
         let tasksDoneTemp: postTask[] = [];
-        
-        const q = await query(collection(db, "/Tasks"), where('project', '==', params.id));
-        let tasks:any = (await getDocs(q)).docs;
+
+        let tasks = (await getDocs(query(collection(db, "/Tasks"), where('project', '==', params.id)))).docs;
 
         console.log(tasks);
-        
-        if (tasks.status === "To Do") {
-            tasksToDoTemp.push();
-        }
-        else if (tasks.status === "Doing") {
-            tasksDoingTemp.push();
-        }
-        else if (tasks.status === "Review") {
-            tasksReviewTemp.push();
-        }
-        else if (tasks.status === "Done") {
-            tasksDoneTemp.push();
-        }
+        tasks.forEach((task) => {
+            var taskData = task.data()
+            switch (taskData.status) {
+                case "To Do":
+                    tasksToDoTemp.push();
+                    break;
+                case "Doing":
+                    tasksDoingTemp.push();
+                    break;
+                case "Review":
+                    tasksReviewTemp.push();
+                    break;
+                case "Done":
+                    tasksDoneTemp.push();
+                    break;
+                default:
+                    break;
+            }
+        })
+
         // return 
     }
-    
+
     useEffect(() => {
         getTasks();
-    }, [getTasks]) 
+    }, [getTasks])
 
     return (
         <Container fluid className="mt-5">
