@@ -23,16 +23,16 @@ export default function Board() {
     const [tasksDone, setTasksDone] = useState<task[]>([]);
 
     async function getTasks() {
-        let tasksToDoTemp: task[];
-        let tasksDoingTemp: task[];
-        let tasksReviewTemp: task[];
-        let tasksDoneTemp: task[];
+        var tasksToDoTemp: task[] = [];
+        var tasksDoingTemp: task[] = [];
+        var tasksReviewTemp: task[] = [];
+        var tasksDoneTemp: task[] = [];
 
         let tasks = (await getDocs(query(collection(db, "/Tasks"), where('project', '==', params.id)))).docs;
 
-        console.log(tasks);
         tasks.forEach((task) => {
             var taskData = task.data()
+
             switch (taskData.status) {
                 case "To Do":
                     tasksToDoTemp.push();
