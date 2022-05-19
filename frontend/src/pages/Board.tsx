@@ -27,22 +27,30 @@ export default function Board() {
         let tasksDoingTemp: task[];
         let tasksReviewTemp: task[];
         let tasksDoneTemp: task[];
-        
-        const q = await query(collection(db, "/Tasks"), where('project', '==', params.id));
-        let tasks = (await getDocs(q)).docs;
 
-        if (tasks.status === "To Do") {
-            tasksToDoTemp.push();
-        }
-        else if (tasks.status === "Doing") {
-            tasksDoingTemp.push();
-        }
-        else if (tasks.status === "Review") {
-            tasksReviewTemp.push();
-        }
-        else if (tasks.status === "Done") {
-            tasksDoneTemp.push();
-        }
+        let tasks = (await getDocs(query(collection(db, "/Tasks"), where('project', '==', params.id)))).docs;
+
+        console.log(tasks);
+        tasks.forEach((task) => {
+            var taskData = task.data()
+            switch (taskData.status) {
+                case "To Do":
+                    tasksToDoTemp.push();
+                    break;
+                case "Doing":
+                    tasksDoingTemp.push();
+                    break;
+                case "Review":
+                    tasksReviewTemp.push();
+                    break;
+                case "Done":
+                    tasksDoneTemp.push();
+                    break;
+                default:
+                    break;
+            }
+        })
+
         // return 
     }
 
