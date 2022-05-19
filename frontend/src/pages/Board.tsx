@@ -26,6 +26,8 @@ export default function Board() {
         const q = await query(collection(db, "/Tasks"), where('project', '==', params.id));
         let tasks:any = (await getDocs(q)).docs;
 
+        console.log(tasks);
+        
         if (tasks.status === "To Do") {
             tasksToDoTemp.push();
         }
@@ -42,8 +44,8 @@ export default function Board() {
     }
     
     useEffect(() => {
-
-    }, []) 
+        getTasks();
+    }, [getTasks]) 
 
     return (
         <Container fluid className="mt-5">

@@ -18,7 +18,7 @@ type Props = {
 }
 
 const CardKanban = (props: Props) => {
-    const [task, setTask] = useState<postTask>(props.tasks);
+    const [task, setTask] = useState<postTask>();
     const [dataId, setDataId] = useState("");
     const [show, setShow] = useState(false);
     const [showInputTitle, setShowInputTitle] = useState(false);
@@ -48,7 +48,8 @@ const CardKanban = (props: Props) => {
             priority: task?.priority,
             description: task?.description,
             comments: task?.comments,
-            status: task?.status
+            status: task?.status,
+            project: props.project
         })
             .then(() =>
                 swal({
