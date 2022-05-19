@@ -9,7 +9,7 @@ import Button from "../Button";
 import Priority from "../Priority";
 import { db } from "../../services/firebase";
 import swal from "sweetalert";
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, getDoc, updateDoc, doc } from "firebase/firestore";
 
 type Props = {
     title: string;
@@ -118,7 +118,7 @@ const CardKanban = (props: Props) => {
     }
 
     const openTask = async (id: string) => {
-        let task = (await getDocs(query(collection(db, "/Tasks/" + id)))).docs;
+        let task = (await getDoc(doc(db, 'Tasks', id)));
         console.log(task)
         // let taskData = task[0].data();
         // console.log(taskData)
