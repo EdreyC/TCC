@@ -14,6 +14,7 @@ export type task = {
 };
 
 export type postTask = {
+  uid: string;
   name?: string;
   priority: string;
   description?: string;

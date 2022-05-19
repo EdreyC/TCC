@@ -9,7 +9,7 @@ import Button from "../Button";
 import Priority from "../Priority";
 import { db } from "../../services/firebase";
 import swal from "sweetalert";
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 
 type Props = {
     title: string;
@@ -34,6 +34,7 @@ const CardKanban = (props: Props) => {
         setShowInputDescription(true);
         setShow(!show);
         setTask({
+            uid: "",
             name: "",
             priority: "Low",
             description: "",
@@ -95,6 +96,7 @@ const CardKanban = (props: Props) => {
     const handlePriority = (oldPriority: string) => {
 
         var ptask: postTask = {
+            uid: task?.uid,
             name: task?.name,
             priority: "Low",
             description: task?.description,
@@ -115,13 +117,20 @@ const CardKanban = (props: Props) => {
         setTask(ptask)
     }
 
+    const openTask = async(uid: string) => {
+        let task = (await getDocs(query(collection(db, "/Tasks"), where('uid', '==', uid)))).docs;
+        console.log(task)
+        // let taskData = task[0].data();
+        // console.log(taskData)
+    }
+
     return (
         <div className="col-lg-3">
             <Card>
                 <Card.Header>{props.title}</Card.Header>
                 <Card.Body className="p-2">
                     {props.tasks.map((task) => {
-                        return (<Card className="my-2" key={task.name} onClick={(e) => {console.log("ok")}}>
+                        return (<Card className="my-2" key={task.uid} onClick={(e) => {openTask(task.uid)}}>
                             <Card.Header>{task.name} <Priority priority={task.priority} /></Card.Header>
                         </Card>)
                     })}
@@ -137,6 +146,7 @@ const CardKanban = (props: Props) => {
                             {showInputTitle &&
                                 <input id="task-title" className="input-tasks" type="text" placeholder="Add your title..."
                                     value={task.name} onChange={(e) => setTask({
+                                        uid: task.uid,
                                         name: e.target.value,
                                         priority: task.priority,
                                         description: task.description,
@@ -160,6 +170,7 @@ const CardKanban = (props: Props) => {
                                     {showInputDescription &&
                                         <input id="task-description" className="input-tasks" type="text" placeholder="Add your description..."
                                             value={task.description} onChange={(e) => setTask({
+                                                uid: task.uid,
                                                 name: task.name,
                                                 priority: task.priority,
                                                 description: e.target.value,
