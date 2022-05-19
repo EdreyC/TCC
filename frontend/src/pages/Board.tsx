@@ -26,6 +26,7 @@ export default function Board() {
 
         tasks.forEach((task) => {
             var taskData = task.data()
+
             switch (taskData.status) {
                 case "To Do":
                     tasksToDoTemp.push(taskData);
