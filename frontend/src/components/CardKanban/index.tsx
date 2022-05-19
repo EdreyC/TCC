@@ -66,7 +66,7 @@ const CardKanban = (props: Props) => {
     }
 
     const DeleteTask = async () => {
-        await deleteDoc(doc(db, "Tasks",))
+        await deleteDoc(doc(db, "Tasks", dataId))
     }
 
     const UpdateTask = async () => {

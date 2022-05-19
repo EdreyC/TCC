@@ -28,7 +28,7 @@ export default function Board() {
             var taskData = task.data()
 
             switch (taskData.status) {
-                case "To Do":
+                case "To do":
                     tasksToDoTemp.push(taskData);
                     break;
                 case "Doing":
