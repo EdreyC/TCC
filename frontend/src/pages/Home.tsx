@@ -3,9 +3,10 @@ import { BsPlus } from "react-icons/bs"
 import { db } from "../services/firebase";
 import Button from './../components/Button/index';
 import Task from "../components/Task";
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
 import swal from "sweetalert";
+import { postTask } from "../models/Task";
 
 type Data = {
   id: string;
@@ -23,7 +24,7 @@ export default function Home() {
 
   const [name, setName] = useState("");
   const [dataProjetc, setDataProject] = useState<Data[]>([]);
-  const [dataTask, setDataTask] = useState<Task[]>([]);
+  const [dataTask, setDataTask] = useState<postTask[]>([]);
 
   async function getData() {
     const q = query(collection(db, "Projects"));
@@ -34,6 +35,26 @@ export default function Home() {
     setDataProject(datadocs.docs.map((item) => ({ ...item.data() as Data })));
 
     // console.log(dataProjetc);
+  }
+
+  async function getTasks() {
+    let tasks: postTask[] = (await getDocs(query(collection(db, "/Tasks")))).docs;
+
+    tasks.forEach((task) => {
+      var taskData = task.data()
+      taskData.uid = task.id;
+      console.log(taskData);
+
+      getProject(taskData.project);
+    })
+  }
+
+  async function getProject(project: string) {
+    let projects = (await getDocs(query(collection(db, "/Projects"), where('project', '==', project)))).docs;
+    projects.forEach((project) => {
+      console.log(project.data());
+    })
+    return "nameproject";
   }
 
   const PostData = async () => {
@@ -59,6 +80,7 @@ export default function Home() {
 
   useEffect(() => {
     getData();
+    getTasks();
   }, [])
 
   return (
