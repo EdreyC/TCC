@@ -121,8 +121,8 @@ const CardKanban = (props: Props) => {
                 <Card.Header>{props.title}</Card.Header>
                 <Card.Body className="p-2">
                     {props.tasks.map((task) => {
-                        return (<Card className="my-2" key={task.name}>
-                            <Card.Header>{task.name} {task.priority}</Card.Header>
+                        return (<Card className="my-2" key={task.name} onClick={(e) => {console.log("ok")}}>
+                            <Card.Header>{task.name} <Priority priority={task.priority} /></Card.Header>
                         </Card>)
                     })}
                 </Card.Body>

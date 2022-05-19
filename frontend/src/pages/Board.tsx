@@ -17,7 +17,6 @@ export default function Board() {
     const [tasksDone, setTasksDone] = useState<postTask[]>([]);
 
     async function getTasks() {
-        // let tasks: postTask[] = [];
         let tasksToDoTemp: postTask[] = [];
         let tasksDoingTemp: postTask[] = [];
         let tasksReviewTemp: postTask[] = [];
@@ -25,33 +24,35 @@ export default function Board() {
 
         let tasks = (await getDocs(query(collection(db, "/Tasks"), where('project', '==', params.id)))).docs;
 
-        console.log(tasks);
         tasks.forEach((task) => {
             var taskData = task.data()
             switch (taskData.status) {
                 case "To Do":
-                    tasksToDoTemp.push();
+                    tasksToDoTemp.push(taskData);
                     break;
                 case "Doing":
-                    tasksDoingTemp.push();
+                    tasksDoingTemp.push(taskData);
                     break;
                 case "Review":
-                    tasksReviewTemp.push();
+                    tasksReviewTemp.push(taskData);
                     break;
                 case "Done":
-                    tasksDoneTemp.push();
+                    tasksDoneTemp.push(taskData);
                     break;
                 default:
                     break;
             }
         })
 
-        // return 
+        setTasksToDo(tasksToDoTemp);
+        setTasksDoing(tasksDoingTemp);
+        setTasksReview(tasksReviewTemp);
+        setTasksDone(tasksDoneTemp);
     }
 
     useEffect(() => {
         getTasks();
-    }, [getTasks])
+    }, [])
 
     return (
         <Container fluid className="mt-5">
