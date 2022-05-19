@@ -117,8 +117,8 @@ const CardKanban = (props: Props) => {
         setTask(ptask)
     }
 
-    const openTask = async(uid: string) => {
-        let task = (await getDocs(query(collection(db, "/Tasks"), where('uid', '==', uid)))).docs;
+    const openTask = async (id: string) => {
+        let task = (await getDocs(query(collection(db, "/Tasks/" + id)))).docs;
         console.log(task)
         // let taskData = task[0].data();
         // console.log(taskData)
@@ -130,7 +130,7 @@ const CardKanban = (props: Props) => {
                 <Card.Header>{props.title}</Card.Header>
                 <Card.Body className="p-2">
                     {props.tasks.map((task) => {
-                        return (<Card className="my-2" key={task.uid} onClick={(e) => {openTask(task.uid)}}>
+                        return (<Card className="my-2" key={task.uid} onClick={(e) => { openTask(task.uid) }}>
                             <Card.Header>{task.name} <Priority priority={task.priority} /></Card.Header>
                         </Card>)
                     })}
