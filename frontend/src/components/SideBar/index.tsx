@@ -7,6 +7,7 @@ import { HiViewBoards } from 'react-icons/hi';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { query, collection, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebase';
+import logo from '../../img/Agilie.it.png';
 
 type Data = {
     id: string;
@@ -35,12 +36,13 @@ const SideBar = () => {
     return (
         <ProSidebar collapsed={collapsed} className="fixed-left">
             <SidebarHeader >
-                {collapsed &&
+                {/* {collapsed &&
                     <MenuItem className='text-center' onClick={(e) => setCollapsed(!collapsed)}><AiOutlineRight /></MenuItem>
                 }
                 {!collapsed &&
                     <MenuItem className='text-center' onClick={(e) => setCollapsed(!collapsed)}><AiOutlineLeft /></MenuItem>
-                }
+                } */}
+                <img src={logo} className='img-fluid px-1' onClick={(e) => setCollapsed(!collapsed)} />
             </SidebarHeader>
             <SidebarContent >
                 <Menu iconShape="square">

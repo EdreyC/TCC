@@ -13,31 +13,19 @@ import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from "f
 
 type Props = {
     title: string;
-    tasks: task[];
+    tasks: postTask[];
     project: string;
 }
 
 const CardKanban = (props: Props) => {
-    const [task, setTask] = useState<postTask>();
+    const [task, setTask] = useState<postTask>(props.tasks);
     const [dataId, setDataId] = useState("");
     const [show, setShow] = useState(false);
     const [showInputTitle, setShowInputTitle] = useState(false);
     const [showInputDescription, setShowInputDescription] = useState(false);
     const [comment, setComment] = useState("");
 
-    async function getData() {
-        const q = query(collection(db, "Tasks"));
-        const datadocs = await getDocs(q);
-        // console.log(datadocs.docs.map((doc) => ({ ...doc.data()})))
-        // setData(datadocs.docs.map(item =>{item.data()}))
-        // console.log(datadocs.docs);
-
-        setDataId(datadocs.docs[0].id);
-        console.log(dataId)
-    }
-
     useEffect(() => {
-        getData();
     }, [])
 
 
@@ -93,13 +81,13 @@ const CardKanban = (props: Props) => {
 
     const handleName = () => {
         setShowInputTitle(!showInputTitle).then(() => {
-            document.getElementById("task-title").focus();
+            document.getElementById("task-title")?.focus();
         });
     }
 
     const handleDescription = () => {
         setShowInputDescription(!showInputDescription).then(() => {
-            document.getElementById("task-description").focus();
+            document.getElementById("task-description")?.focus();
         });
     }
 

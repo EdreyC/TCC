@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 
 import CardKanban from "../components/CardKanban";
-import { task } from "../models/Task";
+import { postTask, task } from "../models/Task";
 import { useParams } from "react-router-dom";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../services/firebase";
@@ -11,17 +11,17 @@ import { where } from 'firebase/firestore'
 export default function Board() {
     const params: any = useParams();
 
-    const [tasksToDo, setTasksToDo] = useState<task[]>([]);
-    const [tasksDoing, setTasksDoing] = useState<task[]>([]);
-    const [tasksReview, setTasksReview] = useState<task[]>([]);
-    const [tasksDone, setTasksDone] = useState<task[]>([]);
+    const [tasksToDo, setTasksToDo] = useState<postTask[]>([]);
+    const [tasksDoing, setTasksDoing] = useState<postTask[]>([]);
+    const [tasksReview, setTasksReview] = useState<postTask[]>([]);
+    const [tasksDone, setTasksDone] = useState<postTask[]>([]);
 
     async function getTasks() {
-        let tasks: task[];
-        let tasksToDoTemp: task[];
-        let tasksDoingTemp: task[];
-        let tasksReviewTemp: task[];
-        let tasksDoneTemp: task[];
+        let tasks: postTask[] = [];
+        let tasksToDoTemp: postTask[] = [];
+        let tasksDoingTemp: postTask[] = [];
+        let tasksReviewTemp: postTask[] = [];
+        let tasksDoneTemp: postTask[] = [];
 
         console.log(query(collection(db, "Tasks"), where('project', '==', params.id)))
 
