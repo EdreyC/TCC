@@ -8,34 +8,11 @@ import { useAuth } from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import { postTask } from "../models/Task";
 
-type Data = {
-  id: string;
-  name: string;
-  owner: string
-}
-
-type Task = {
-  name: string;
-  description: string
-}
-
 export default function Home() {
   const { user } = useAuth();
 
   const [name, setName] = useState("");
-  const [dataProject, setDataProject] = useState<Data[]>([]);
   const [dataTasks, setDataTasks] = useState<postTask[]>([]);
-
-  async function getData() {
-    const q = query(collection(db, "Projects"));
-    const datadocs = await getDocs(q);
-    // console.log(datadocs.docs.map((doc) => ({ ...doc.data()})))
-    // setData(datadocs.docs.map(item =>{item.data()}))
-    // console.log(datadocs.docs);
-    setDataProject(datadocs.docs.map((item) => ({ ...item.data() as Data })));
-
-    // console.log(dataProjetc);
-  }
 
   async function getProject(id: string) {
     let project = (await getDoc(doc(db, 'Projects', id)));
@@ -79,11 +56,9 @@ export default function Home() {
           title: 'Error',
           text: 'Error! Please try again.',
         }));
-    getData();
   };
 
   useEffect(() => {
-    // getData();
     getTasks();
   }, [])
 
@@ -95,7 +70,7 @@ export default function Home() {
       </div>
       <div className="border border-2 border-secondary rounded p-3 my-5">
         {
-          dataProject.length == 0 ? <h2>Create your first task above ☝</h2> :
+          dataTasks.length == 0 ? <h2>Create your first project above ☝</h2> :
             <div className="rounded p-3">
               {
                 dataTasks.map((item, index) => (
