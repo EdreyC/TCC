@@ -8,8 +8,8 @@ import { task, postTask } from "../../models/Task";
 import Button from "../Button";
 import Priority from "../Priority";
 import { db } from "../../services/firebase";
-import swal from "sweetalert";
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import Swal from "sweetalert2";
+import { addDoc, collection, deleteDoc, getDoc, updateDoc, doc } from "firebase/firestore";
 
 type Props = {
     title: string;
@@ -30,9 +30,6 @@ const CardKanban = (props: Props) => {
 
 
     const addTask = () => {
-        setShowInputTitle(true);
-        setShowInputDescription(true);
-        setShow(!show);
         setTask({
             uid: "",
             name: "",
@@ -41,6 +38,9 @@ const CardKanban = (props: Props) => {
             comments: [],
             status: props.title,
         });
+        setShowInputTitle(true);
+        setShowInputDescription(true);
+        setShow(!show);
     }
 
     const PostTask = async () => {
@@ -53,13 +53,13 @@ const CardKanban = (props: Props) => {
             project: props.project
         })
             .then(() =>
-                swal({
+                Swal.fire({
                     icon: 'success',
                     title: 'Task created',
                     text: 'Congratulations! Your task has been created.',
                 }))
             .catch(() =>
-                swal({
+                Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: 'Error! Please try again.',
@@ -105,9 +105,8 @@ const CardKanban = (props: Props) => {
         };
         if (oldPriority === "Low")
             ptask.priority = "Medium"
-        else if (oldPriority === "Medium") {
+        else if (oldPriority === "Medium")
             ptask.priority = "High";
-        }
         else if (oldPriority === "High")
             ptask.priority = "DoNow"
         else if (oldPriority === "DoNow")
@@ -118,10 +117,12 @@ const CardKanban = (props: Props) => {
     }
 
     const openTask = async (id: string) => {
-        let task = (await getDocs(query(collection(db, "/Tasks/" + id)))).docs;
-        // console.log(task)
-        // let taskData = task[0].data();
-        // console.log(taskData)
+        let task = (await getDoc(doc(db, 'Tasks', id)));
+        console.log(task.data())
+        setTask(task.data());
+        setShowInputTitle(false);
+        setShowInputDescription(false);
+        setShow(!show);
     }
 
     return (
@@ -130,7 +131,7 @@ const CardKanban = (props: Props) => {
                 <Card.Header>{props.title}</Card.Header>
                 <Card.Body className="p-2">
                     {props.tasks.map((task) => {
-                        return (<Card className="my-2" key={task.uid} onClick={(e) => { openTask(task.uid) }}>
+                        return (<Card className="my-2" key={task.uid} onClick={(e) => { openTask(task.uid) }} style={{ cursor: 'pointer' }}>
                             <Card.Header>{task.name} <Priority priority={task.priority} /></Card.Header>
                         </Card>)
                     })}

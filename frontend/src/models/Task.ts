@@ -20,6 +20,7 @@ export type postTask = {
   description?: string;
   comments?: comment[];
   status?: string;
+  project?: string;
 };
 
 export type comment = {

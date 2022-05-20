@@ -1592,15 +1592,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/sweetalert@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@types/sweetalert@npm:2.0.4"
-  dependencies:
-    sweetalert: "*"
-  checksum: 18b6abd0bb27607d843e9bd8b9b23404deb070c3905dc953ab1f10be3a25162f922e2304adca0e771325c09d40f81b11c5c9e5606298c36cdf07bfdce4babfe6
-  languageName: node
-  linkType: hard
-
 "@types/unist@npm:*, @types/unist@npm:^2.0.0":
   version: 2.0.6
   resolution: "@types/unist@npm:2.0.6"
@@ -2450,13 +2441,6 @@ __metadata:
   dependencies:
     is-arrayish: ^0.2.1
   checksum: c1c2b8b65f9c91b0f9d75f0debaa7ec5b35c266c2cac5de412c1a6de86d4cbae04ae44e510378cb14d032d0645a36925d0186f8bb7367bcc629db256b743a001
-  languageName: node
-  linkType: hard
-
-"es6-object-assign@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "es6-object-assign@npm:1.1.0"
-  checksum: 8d4fdf63484d78b5c64cacc2c2e1165bc7b6a64b739d2a9db6a4dc8641d99cc9efb433cdd4dc3d3d6b00bfa6ce959694e4665e3255190339945c5f33b692b5d8
   languageName: node
   linkType: hard
 
@@ -5008,13 +4992,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"promise-polyfill@npm:^6.0.2":
-  version: 6.1.0
-  resolution: "promise-polyfill@npm:6.1.0"
-  checksum: 6f1899cca37e48f67a424842282acd525d8d99d3536f2d97e37a117cfc4a0006683330ceaf5a15fbc09b4450f319a680292f9970a5f8e9cf90acbce0bdb0f751
-  languageName: node
-  linkType: hard
-
 "promise-retry@npm:^2.0.1":
   version: 2.0.1
   resolution: "promise-retry@npm:2.0.1"
@@ -6052,16 +6029,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sweetalert@npm:*, sweetalert@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "sweetalert@npm:2.1.2"
-  dependencies:
-    es6-object-assign: ^1.1.0
-    promise-polyfill: ^6.0.2
-  checksum: 6f15adc82643c1374b70390ca56eca62f07365ca933c6b3722e2f651a19fff810120c2d7547e76de17a2b5da36e31f14d1a12358e69e0548c91b74e5af887bd3
-  languageName: node
-  linkType: hard
-
 "tar@npm:^6.0.2, tar@npm:^6.1.11, tar@npm:^6.1.2":
   version: 6.1.11
   resolution: "tar@npm:6.1.11"
@@ -6089,7 +6056,6 @@ __metadata:
     "@types/react-bootstrap": ^0.32.29
     "@types/react-dom": ^17.0.13
     "@types/react-router-dom": ^5.3.3
-    "@types/sweetalert": ^2.0.4
     "@uiw/react-md-editor": ^3.12.1
     "@vitejs/plugin-react": ^1.0.7
     axios: ^0.26.0
@@ -6104,7 +6070,6 @@ __metadata:
     react-pro-sidebar: ^0.7.1
     react-router-dom: ^6.2.2
     sass: ^1.49.8
-    sweetalert: ^2.1.2
     sweetalert2: ^11.4.14
     typescript: 4.4.2
     vite: ^2.8.0

@@ -3,9 +3,9 @@ import { BsPlus } from "react-icons/bs"
 import { db } from "../services/firebase";
 import Button from './../components/Button/index';
 import Task from "../components/Task";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 import { postTask } from "../models/Task";
 
 type Data = {
@@ -23,8 +23,8 @@ export default function Home() {
   const { user } = useAuth();
 
   const [name, setName] = useState("");
-  const [dataProjetc, setDataProject] = useState<Data[]>([]);
-  const [dataTask, setDataTask] = useState<postTask[]>([]);
+  const [dataProject, setDataProject] = useState<Data[]>([]);
+  const [dataTasks, setDataTasks] = useState<postTask[]>([]);
 
   async function getData() {
     const q = query(collection(db, "Projects"));
@@ -37,24 +37,28 @@ export default function Home() {
     // console.log(dataProjetc);
   }
 
+  async function getProject(id: string) {
+    let project = (await getDoc(doc(db, 'Projects', id)));
+    return project.data()?.name;
+  }
+
   async function getTasks() {
     let tasks: postTask[] = (await getDocs(query(collection(db, "/Tasks")))).docs;
 
+    let tasksData: [] = [];
     tasks.forEach((task) => {
-      var taskData = task.data()
+      let taskData: postTask = task.data();
       taskData.uid = task.id;
-      console.log(taskData);
 
-      getProject(taskData.project);
+      // taskData.project = await getProject(task.project);
+      getProject(taskData?.project).then((project) => {
+        taskData.project = project;
+      });
+      console.log(taskData.project)
+      tasksData.push(taskData);
     })
-  }
-
-  async function getProject(project: string) {
-    let projects = (await getDocs(query(collection(db, "/Projects"), where('project', '==', project)))).docs;
-    projects.forEach((project) => {
-      console.log(project.data());
-    })
-    return "nameproject";
+    console.log(tasksData);
+    setDataTasks(tasksData);
   }
 
   const PostData = async () => {
@@ -64,13 +68,13 @@ export default function Home() {
       owner: user?.name,
     })
       .then(() =>
-        swal({
+        Swal.fire({
           icon: 'success',
           title: 'Task created',
           text: 'Congratulations! Your task has been created.',
         }))
       .catch(() =>
-        swal({
+        Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Error! Please try again.',
@@ -79,7 +83,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    getData();
+    // getData();
     getTasks();
   }, [])
 
@@ -91,13 +95,12 @@ export default function Home() {
       </div>
       <div className="border border-2 border-secondary rounded p-3 my-5">
         {
-          dataProjetc.length == 0 ? <h2>Create your first task above ☝</h2> :
+          dataProject.length == 0 ? <h2>Create your first task above ☝</h2> :
             <div className="rounded p-3">
               {
-                dataProjetc.map((item, index) => (
-                  <div key={index}>
-                    <p>{item.id}</p>
-                    <Task NameProjectAndTask={item.name + "/nomedatask"} priority='Medium' time="Expira em algumas horas" />
+                dataTasks.map((item, index) => (
+                  <div key={index} className="my-3">
+                    <Task NameProjectAndTask={item.project + "/" + item.name} priority='Medium' time="Expira em algumas horas" />
                   </div>
                 ))
               }
