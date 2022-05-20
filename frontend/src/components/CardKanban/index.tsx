@@ -1,14 +1,14 @@
 import MDEditor from "@uiw/react-md-editor";
 import { useEffect, useState } from "react";
-import { Card, Container, ListGroup, ListGroupItem, Modal } from "react-bootstrap";
+import { Button, Card, Container, ListGroup, ListGroupItem, Modal } from "react-bootstrap";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsTextLeft } from "react-icons/bs";
 import { FaComments } from "react-icons/fa";
-import { task, postTask } from "../../models/Task";
-import Button from "../Button";
+import { postTask } from "../../models/Task";
+// import Button from "../Button";
 import Priority from "../Priority";
 import { db } from "../../services/firebase";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import { addDoc, collection, deleteDoc, getDoc, updateDoc, doc } from "firebase/firestore";
 
 type Props = {
@@ -25,9 +25,10 @@ const CardKanban = (props: Props) => {
     const [showInputDescription, setShowInputDescription] = useState(false);
     const [comment, setComment] = useState("");
 
+    const [showButtonAddTask, setShowButtonAddTask] = useState(true);
+
     useEffect(() => {
     }, [])
-
 
     const addTask = () => {
         setTask({
@@ -41,6 +42,7 @@ const CardKanban = (props: Props) => {
         setShowInputTitle(true);
         setShowInputDescription(true);
         setShow(!show);
+        setShowButtonAddTask(true);
     }
 
     const PostTask = async () => {
@@ -53,13 +55,13 @@ const CardKanban = (props: Props) => {
             project: props.project
         })
             .then(() =>
-                Swal.fire({
+                swal({
                     icon: 'success',
                     title: 'Task created',
                     text: 'Congratulations! Your task has been created.',
                 }))
             .catch(() =>
-                Swal.fire({
+                swal({
                     icon: 'error',
                     title: 'Error',
                     text: 'Error! Please try again.',
@@ -67,18 +69,60 @@ const CardKanban = (props: Props) => {
     }
 
     const DeleteTask = async () => {
-        await deleteDoc(doc(db, "Tasks", dataId))
+        await deleteDoc(doc(db, "Tasks", task.uid))
+    }
+
+    const confirmRemove = async () => {
+        swal("Are you sure?", {
+            dangerMode: true,
+            buttons: true,
+        }).then((value) => {
+            if (value)
+                DeleteTask();
+        });
     }
 
     const UpdateTask = async () => {
-        const taskUpdate = doc(db, "Tasks", dataId);
+        const taskUpdate = doc(db, "Tasks", task.uid);
 
         await updateDoc(taskUpdate, {
             name: task?.name,
-            priority: true,
+            priority: task?.priority,
             description: task?.description,
             status: task?.status
         })
+            .then(() =>
+                swal({
+                    icon: 'success',
+                    title: 'Task created',
+                    text: 'Congratulations! Your task has been created.',
+                }))
+            .catch(() =>
+                swal({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error! Please try again.',
+                }));
+    }
+
+    const CommentTask = async () => {
+        const taskUpdate = doc(db, "Tasks", task.uid);
+
+        await updateDoc(taskUpdate, {
+            comments: comment
+        })
+            .then(() =>
+                swal({
+                    icon: 'success',
+                    title: 'Task created',
+                    text: 'Congratulations! Your task has been created.',
+                }))
+            .catch(() =>
+                swal({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error! Please try again.',
+                }));
     }
 
     const handleName = () => {
@@ -118,11 +162,13 @@ const CardKanban = (props: Props) => {
 
     const openTask = async (id: string) => {
         let task = (await getDoc(doc(db, 'Tasks', id)));
-        console.log(task.data())
-        setTask(task.data());
+        let tasksData: postTask[] = task.data();
+        tasksData.uid = task.id;
+        setTask(tasksData);
         setShowInputTitle(false);
         setShowInputDescription(false);
         setShow(!show);
+        setShowButtonAddTask(false);
     }
 
     return (
@@ -192,7 +238,6 @@ const CardKanban = (props: Props) => {
                                             <div key={comments.uid}>
                                                 <h6><strong>{comments.uid}</strong></h6>
                                                 <p><small>{comments.text}</small></p>
-                                                {/* <span>{comments.date}</span> */}
                                                 <hr />
                                             </div>
                                         )
@@ -202,16 +247,22 @@ const CardKanban = (props: Props) => {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer className="justify-content-center" data-color-mode="light">
-                        <MDEditor
-                            value={comment}
-                            onChange={setComment}
-                            preview={'edit'}
-                        />
-                        <Button onClick={() => PostTask()}>Adicionar</Button>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Add your comment..."
+                            value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
+                        {showButtonAddTask &&
+                            <Button onClick={(e) => PostTask()}>Adicionar</Button>
+                        }
+                        {!showButtonAddTask &&
+                            <>
+                                <Button onClick={(e) => console.log('Updated')}>Comentar</Button>
+                                <Button onClick={(e) => UpdateTask()}>Atualizar</Button>
+                            </>
+                        }
+                        <Button variant="danger" onClick={(e) => confirmRemove()}>Remover</Button>
                     </Modal.Footer>
                 </Modal>
             }
-        </div>
+        </div >
     )
 }
 

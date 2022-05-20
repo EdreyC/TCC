@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 
 import CardKanban from "../components/CardKanban";
-import { postTask, task } from "../models/Task";
+import { postTask } from "../models/Task";
 import { useParams } from "react-router-dom";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../services/firebase";
-import { where } from 'firebase/firestore'
+import { where } from 'firebase/firestore';
 
 export default function Board() {
     const params: any = useParams();
@@ -58,7 +58,7 @@ export default function Board() {
 
     return (
         <Container fluid className="mt-5">
-            <div className="row justify-content-center align-items-center">
+            <div className="row justify-content-center">
                 <CardKanban title="To do" tasks={tasksToDo} project={params.id} />
                 <CardKanban title="Doing" tasks={tasksDoing} project={params.id} />
                 <CardKanban title="Review" tasks={tasksReview} project={params.id} />

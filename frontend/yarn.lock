@@ -2444,6 +2444,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es6-object-assign@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "es6-object-assign@npm:1.1.0"
+  checksum: 8d4fdf63484d78b5c64cacc2c2e1165bc7b6a64b739d2a9db6a4dc8641d99cc9efb433cdd4dc3d3d6b00bfa6ce959694e4665e3255190339945c5f33b692b5d8
+  languageName: node
+  linkType: hard
+
 "esbuild-android-64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-android-64@npm:0.14.38"
@@ -4992,6 +4999,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"promise-polyfill@npm:^6.0.2":
+  version: 6.1.0
+  resolution: "promise-polyfill@npm:6.1.0"
+  checksum: 6f1899cca37e48f67a424842282acd525d8d99d3536f2d97e37a117cfc4a0006683330ceaf5a15fbc09b4450f319a680292f9970a5f8e9cf90acbce0bdb0f751
+  languageName: node
+  linkType: hard
+
 "promise-retry@npm:^2.0.1":
   version: 2.0.1
   resolution: "promise-retry@npm:2.0.1"
@@ -6022,10 +6036,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sweetalert2@npm:^11.4.14":
-  version: 11.4.14
-  resolution: "sweetalert2@npm:11.4.14"
-  checksum: 7112936b915c06dfd80738a008d1a678cc420df485642ed1996d3e3d65a5ff90c3dc10895742aca506dcde867664e4c50c6fc5fdde0b89fb231a5b259436b6e8
+"sweetalert@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "sweetalert@npm:2.1.2"
+  dependencies:
+    es6-object-assign: ^1.1.0
+    promise-polyfill: ^6.0.2
+  checksum: 6f15adc82643c1374b70390ca56eca62f07365ca933c6b3722e2f651a19fff810120c2d7547e76de17a2b5da36e31f14d1a12358e69e0548c91b74e5af887bd3
   languageName: node
   linkType: hard
 
@@ -6070,7 +6087,7 @@ __metadata:
     react-pro-sidebar: ^0.7.1
     react-router-dom: ^6.2.2
     sass: ^1.49.8
-    sweetalert2: ^11.4.14
+    sweetalert: ^2.1.2
     typescript: 4.4.2
     vite: ^2.8.0
   languageName: unknown

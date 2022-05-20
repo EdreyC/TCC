@@ -3,9 +3,9 @@ import { BsPlus } from "react-icons/bs"
 import { db } from "../services/firebase";
 import Button from './../components/Button/index';
 import Task from "../components/Task";
-import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, query } from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import { postTask } from "../models/Task";
 
 export default function Home() {
@@ -45,13 +45,13 @@ export default function Home() {
       owner: user?.name,
     })
       .then(() =>
-        Swal.fire({
+        swal({
           icon: 'success',
           title: 'Task created',
           text: 'Congratulations! Your task has been created.',
         }))
       .catch(() =>
-        Swal.fire({
+        swal({
           icon: 'error',
           title: 'Error',
           text: 'Error! Please try again.',

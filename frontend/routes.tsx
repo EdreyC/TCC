@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "./src/hooks/useAuth";
 import Home from "./src/pages/Home";
 import Signin from "./src/pages/Signin";
@@ -6,48 +6,21 @@ import Signup from "./src/pages/Signup";
 import Board from "./src/pages/Board";
 import Navbar from "./src/components/NavBar";
 import SideBar from "./src/components/SideBar";
-import Swal from 'sweetalert2';
-import { useEffect } from "react";
+import swal from "sweetalert";
+import { useEffect, useState } from "react";
 
 export default function MainRoutes() {
   const { user } = useAuth();
-
-  // const logando = () => {
-  //   let timerInterval: any
-  //   Swal.fire({
-  //     title: 'Logando...',
-  //     html: '<b></b> milliseconds.',
-  //     timer: 5000,
-  //     timerProgressBar: true,
-  //     didOpen: () => {
-  //       Swal.showLoading()
-  //       const b = Swal.getHtmlContainer().querySelector('b')
-  //       timerInterval = setInterval(() => {
-  //         b.textContent = Swal.getTimerLeft()
-  //       }, 100)
-  //     },
-  //     willClose: () => {
-  //       clearInterval(timerInterval)
-  //     }
-  //   }).then((result) => {
-  //     if (result.dismiss === Swal.DismissReason.timer) {
-  //     }
-  //   })
-  // }
+  const navigate = useNavigate();
 
   useEffect(() => {
-    Swal.fire(
-      'Good job!',
-      'You clicked the button!',
-      'success'
-    )
-    // let btn = document.createElement("button");
-    // btn.innerHTML = "";
-    // btn.id = "btn";
-    // btn.onclick = logando;
-    // document.body.appendChild(btn);
-
-    // document.getElementById("btn")?.click();
+    // swal("Carregando...", {
+    //   buttons: false,
+    //   timer: 5000,
+    // }).then(() => {
+    //   if (!user)
+    //     navigate("/signin")
+    // });
   }, [])
 
   return (

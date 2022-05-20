@@ -1,16 +1,22 @@
-html,body,button,li,ul,span{
+html,
+body,
+button,
+li,
+ul,
+span {
     font-family: 'Inter';
 }
 
-a{
+a {
     color: #7862FF;
     text-decoration: none;
-    &:hover{
+
+    &:hover {
         text-decoration: underline;
     }
 }
 
-input{
+input {
     outline: none;
 }
 
