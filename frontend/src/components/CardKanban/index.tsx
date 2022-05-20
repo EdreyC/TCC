@@ -92,7 +92,7 @@ const CardKanban = (props: Props) => {
             .then(() =>
                 swal({
                     icon: 'success',
-                    title: 'Task updated',
+                    title: 'Task Updated',
                     text: 'Congratulations! Your task has been updated.',
                 }))
             .catch(() =>
@@ -106,14 +106,18 @@ const CardKanban = (props: Props) => {
     const CommentTask = async () => {
         const taskUpdate = doc(db, "Tasks", task.uid);
 
+        /*await addDoc(collection(db, "Tasks", task.uid), {
+            comments: task?.comments,
+        })*/
+
         await updateDoc(taskUpdate, {
             comments: comment
         })
             .then(() =>
                 swal({
                     icon: 'success',
-                    title: 'Task created',
-                    text: 'Congratulations! Your task has been created.',
+                    title: 'Comment created',
+                    text: 'Congratulations! Yourcomment has been created.',
                 }))
             .catch(() =>
                 swal({
@@ -121,6 +125,8 @@ const CardKanban = (props: Props) => {
                     title: 'Error',
                     text: 'Error! Please try again.',
                 }));
+
+        console.log(task.comment)
     }
 
     const handleName = () => {
