@@ -4,13 +4,14 @@ import { Container } from "react-bootstrap";
 import CardKanban from "../components/CardKanban";
 import { postTask } from "../models/Task";
 import { useParams } from "react-router-dom";
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { where } from 'firebase/firestore';
 
 export default function Board() {
     const params: any = useParams();
 
+    const [project, setProject] = useState();
     const [tasksToDo, setTasksToDo] = useState<postTask[]>([]);
     const [tasksDoing, setTasksDoing] = useState<postTask[]>([]);
     const [tasksReview, setTasksReview] = useState<postTask[]>([]);
@@ -52,12 +53,21 @@ export default function Board() {
         setTasksDone(tasksDoneTemp);
     }
 
+    async function getProject(id: string) {
+        let project = (await getDoc(doc(db, 'Projects', id)));
+        setProject(project.data()?.name);
+    }
+
     useEffect(() => {
-        getTasks();
-    }, [])
+        if (params) {
+            getProject(params.id);
+            getTasks();
+        }
+    }, [params])
 
     return (
         <Container fluid className="mt-5">
+            <h1 className="text-center mb-5">{project}</h1>
             <div className="row justify-content-center">
                 <CardKanban title="To do" tasks={tasksToDo} project={params.id} />
                 <CardKanban title="Doing" tasks={tasksDoing} project={params.id} />

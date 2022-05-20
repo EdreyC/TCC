@@ -1,4 +1,3 @@
-import MDEditor from "@uiw/react-md-editor";
 import { useEffect, useState } from "react";
 import { Button, Card, Container, ListGroup, ListGroupItem, Modal } from "react-bootstrap";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -19,7 +18,6 @@ type Props = {
 
 const CardKanban = (props: Props) => {
     const [task, setTask] = useState<postTask>();
-    const [dataId, setDataId] = useState("");
     const [show, setShow] = useState(false);
     const [showInputTitle, setShowInputTitle] = useState(false);
     const [showInputDescription, setShowInputDescription] = useState(false);
@@ -94,8 +92,8 @@ const CardKanban = (props: Props) => {
             .then(() =>
                 swal({
                     icon: 'success',
-                    title: 'Task created',
-                    text: 'Congratulations! Your task has been created.',
+                    title: 'Task updated',
+                    text: 'Congratulations! Your task has been updated.',
                 }))
             .catch(() =>
                 swal({
@@ -207,6 +205,19 @@ const CardKanban = (props: Props) => {
                                     <Priority priority={task.priority} onClick={() => handlePriority(task.priority)} />
                                 </h2>
                             }
+                            <select className="form-select" value={props.title} onChange={(e) => setTask({
+                                uid: task.uid,
+                                name: task.name,
+                                priority: task.priority,
+                                description: task.description,
+                                comments: task.comments,
+                                status: e.target.value,
+                            })}>
+                                <option value="To do">To do</option>
+                                <option value="Doing">Doing</option>
+                                <option value="Review">Review</option>
+                                <option value="Done">Done</option>
+                            </select>
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -254,7 +265,7 @@ const CardKanban = (props: Props) => {
                         }
                         {!showButtonAddTask &&
                             <>
-                                <Button onClick={(e) => console.log('Updated')}>Comentar</Button>
+                                <Button onClick={(e) => CommentTask()}>Comentar</Button>
                                 <Button onClick={(e) => UpdateTask()}>Atualizar</Button>
                             </>
                         }
