@@ -26,10 +26,12 @@ export default function Signin() {
   }
 
   async function SignInWithEmailAndPassword() {
+
     await signInWithEmailAndPassword(auth, email, password).then((res) => {
-      setUserWithoutGoogle(res.user)
+      console.log(res.user)
+
+        navigate("/")
     })
-    navigate("/")
   }
 
   async function SignInWithGoogle() {

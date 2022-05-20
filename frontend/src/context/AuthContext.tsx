@@ -4,8 +4,8 @@ import { auth } from "../services/firebase";
 
 type User = {
   id: string;
-  name: string;
-  avatar: string;
+  name: string | null;
+  avatar: string | null;
 }
 
 type AuthContextType = {
@@ -26,10 +26,6 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
         const { displayName, photoURL, uid } = user
-
-        if (!displayName || !photoURL) {
-          throw new Error('Missing information from Google Account.');
-        }
 
         setUser({
           id: uid,

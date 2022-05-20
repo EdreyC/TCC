@@ -16,17 +16,21 @@ const Signup = () => {
   const auth = getAuth();
 
   async function EmailPasswordSignup() {
+    
     if (!auth.currentUser) {
       if (email == "" || password == "") {
         document.getElementById("email")?.focus()
         alert("preencha as credenciais")
       }
       else if (password != confirmPassword) {
+        document.getElementById("confirmPassword")?.focus()
+        alert("Confirmação de senha errada")
         //avisar
       }
       else {
         await createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
+            
             console.log(userCredential.user)
             const user = userCredential.user;
             // ...
@@ -34,6 +38,14 @@ const Signup = () => {
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            console.log(errorCode)
+            console.log(errorMessage)
+            if(errorCode === "auth/weak-password"){
+              alert("Senha fraca, mínimo 6 caracteres")
+            }
+            else if(errorCode==="auth/invalid-email"){
+              alert("Email inválido")
+            }
             // ..
           });
       }
@@ -65,10 +77,10 @@ const Signup = () => {
             </div>
             <div className='input-password my-2 d-flex hstack gap-3'>
               <BiLock size={22} color='#363636' />
-              <input type={pass ? "text" : 'password'} placeholder='Confirm your password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+              <input id='confirmPassword' type={pass ? "text" : 'password'} placeholder='Confirm your password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
             </div>
             <div className='wrapper-signinbuttons d-flex'>
-              <Button onClick={() => (EmailPasswordSignup())}>Sign Up</Button>
+              <Button onClick={() => EmailPasswordSignup()}>Sign Up</Button>
             </div>
           </div>
         </Col>
