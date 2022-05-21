@@ -8,7 +8,7 @@ import { postTask } from "../../models/Task";
 import Priority from "../Priority";
 import { db } from "../../services/firebase";
 import swal from "sweetalert";
-import { addDoc, collection, deleteDoc, getDoc, updateDoc, doc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, getDoc, updateDoc, doc, arrayUnion } from "firebase/firestore";
 
 type Props = {
     title: string;
@@ -104,14 +104,10 @@ const CardKanban = (props: Props) => {
     }
 
     const CommentTask = async () => {
-        const taskUpdate = doc(db, "Tasks", task.uid);
+        const taskComment = doc(db, "Tasks", task.uid);
 
-        /*await addDoc(collection(db, "Tasks", task.uid), {
-            comments: task?.comments,
-        })*/
-
-        await updateDoc(taskUpdate, {
-            comments: comment
+        await updateDoc(taskComment, {
+            comments: arrayUnion(comment)
         })
             .then(() =>
                 swal({
@@ -126,7 +122,7 @@ const CardKanban = (props: Props) => {
                     text: 'Error! Please try again.',
                 }));
 
-        console.log(task.comment)
+        console.log("Comentário adicionado!")
     }
 
     const handleName = () => {
