@@ -7,10 +7,12 @@ import { addDoc, collection, doc, getDoc, getDocs, query } from "firebase/firest
 import { useAuth } from "../hooks/useAuth";
 import swal from "sweetalert";
 import { postTask } from "../models/Task";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { updateDoc } from "firebase/firestore";
 
+updateDoc
 export default function Home() {
   const { user } = useAuth();
-
   const [name, setName] = useState("");
   const [dataTasks, setDataTasks] = useState<postTask[]>([]);
 
@@ -59,6 +61,8 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const auth = getAuth();
+   
     getTasks();
   }, [])
 
