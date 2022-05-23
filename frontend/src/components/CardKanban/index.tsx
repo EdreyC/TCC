@@ -44,26 +44,33 @@ const CardKanban = (props: Props) => {
     }
 
     const PostTask = async () => {
-        await addDoc(collection(db, "Tasks"), {
-            name: task?.name,
-            priority: task?.priority,
-            description: task?.description,
-            comments: task?.comments,
-            status: task?.status,
-            project: props.project
-        })
-            .then(() =>
-                swal({
-                    icon: 'success',
-                    title: 'Task created',
-                    text: 'Congratulations! Your task has been created.',
-                }))
-            .catch(() =>
-                swal({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Error! Please try again.',
-                }));
+        name ?
+            await addDoc(collection(db, "Tasks"), {
+                name: task?.name,
+                priority: task?.priority,
+                description: task?.description,
+                comments: task?.comments,
+                status: task?.status,
+                project: props.project
+            })
+                .then(() =>
+                    swal({
+                        icon: 'success',
+                        title: 'Task created',
+                        text: 'Congratulations! Your task has been created.',
+                    }))
+                .catch(() =>
+                    swal({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Error! Please try again.',
+                    }))
+                    :
+                    swal({
+                        icon: 'warning',
+                        title: 'Void name',
+                        text: 'Add name to your project.',
+                })
     }
 
     const DeleteTask = async () => {
