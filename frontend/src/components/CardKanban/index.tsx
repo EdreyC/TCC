@@ -9,14 +9,17 @@ import Priority from "../Priority";
 import { db } from "../../services/firebase";
 import swal from "sweetalert";
 import { addDoc, collection, deleteDoc, getDoc, updateDoc, doc, arrayUnion } from "firebase/firestore";
+import { useAuth } from "../../hooks/useAuth";
 
 type Props = {
     title: string;
     tasks: postTask[];
     project: string;
+    reloadTasks: () => {};
 }
 
 const CardKanban = (props: Props) => {
+    const { user } = useAuth();
     const [task, setTask] = useState<postTask>();
     const [show, setShow] = useState(false);
     const [showInputTitle, setShowInputTitle] = useState(false);
@@ -63,11 +66,17 @@ const CardKanban = (props: Props) => {
                     icon: 'error',
                     title: 'Error',
                     text: 'Error! Please try again.',
-                }));
+                }))
+            .finally(() =>
+                props.reloadTasks()
+            );
     }
 
     const DeleteTask = async () => {
         await deleteDoc(doc(db, "Tasks", task.uid))
+            .finally(() =>
+                props.reloadTasks()
+            );
     }
 
     const confirmRemove = async () => {
@@ -100,14 +109,17 @@ const CardKanban = (props: Props) => {
                     icon: 'error',
                     title: 'Error',
                     text: 'Error! Please try again.',
-                }));
+                }))
+            .finally(() =>
+                props.reloadTasks()
+            );
     }
 
     const CommentTask = async () => {
         const taskComment = doc(db, "Tasks", task.uid);
 
         await updateDoc(taskComment, {
-            comments: arrayUnion(comment)
+            comments: arrayUnion({ text: comment, owner: user?.name })
         })
             .then(() =>
                 swal({
@@ -120,21 +132,21 @@ const CardKanban = (props: Props) => {
                     icon: 'error',
                     title: 'Error',
                     text: 'Error! Please try again.',
-                }));
-
-        console.log("Comentário adicionado!")
+                }))
+            .finally(() => {
+                setComment('');
+                props.reloadTasks();
+            });
     }
 
     const handleName = () => {
-        setShowInputTitle(!showInputTitle).then(() => {
-            document.getElementById("task-title")?.focus();
-        });
+        setShowInputTitle(!showInputTitle);
+        document.getElementById("task-title")?.focus();
     }
 
     const handleDescription = () => {
-        setShowInputDescription(!showInputDescription).then(() => {
-            document.getElementById("task-description")?.focus();
-        });
+        setShowInputDescription(!showInputDescription);
+        document.getElementById("task-description")?.focus();
     }
 
     const handlePriority = (oldPriority: string) => {
@@ -162,7 +174,7 @@ const CardKanban = (props: Props) => {
 
     const openTask = async (id: string) => {
         let task = (await getDoc(doc(db, 'Tasks', id)));
-        let tasksData: postTask[] = task.data();
+        let tasksData: postTask[] = task?.data();
         tasksData.uid = task.id;
         setTask(tasksData);
         setShowInputTitle(false);
@@ -250,7 +262,8 @@ const CardKanban = (props: Props) => {
                                     {task.comments?.map((comment, index) => {
                                         return (
                                             <div key={index}>
-                                                <p><small>{comment}</small></p>
+                                                <small>{comment?.owner}</small>
+                                                <p>{comment?.text}</p>
                                                 <hr />
                                             </div>
                                         )

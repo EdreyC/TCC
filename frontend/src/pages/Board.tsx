@@ -69,10 +69,10 @@ export default function Board() {
         <Container fluid className="mt-5">
             <h1 className="text-center mb-5">{project}</h1>
             <div className="row justify-content-center">
-                <CardKanban title="To do" tasks={tasksToDo} project={params.id} />
-                <CardKanban title="Doing" tasks={tasksDoing} project={params.id} />
-                <CardKanban title="Review" tasks={tasksReview} project={params.id} />
-                <CardKanban title="Done" tasks={tasksDone} project={params.id} />
+                <CardKanban title="To do" reloadTasks={getTasks} tasks={tasksToDo} project={params.id} />
+                <CardKanban title="Doing" reloadTasks={getTasks} tasks={tasksDoing} project={params.id} />
+                <CardKanban title="Review" reloadTasks={getTasks} tasks={tasksReview} project={params.id} />
+                <CardKanban title="Done" reloadTasks={getTasks} tasks={tasksDone} project={params.id} />
             </div>
         </Container>
     )
