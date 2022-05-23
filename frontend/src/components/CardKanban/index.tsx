@@ -169,6 +169,7 @@ const CardKanban = (props: Props) => {
         setShowInputDescription(false);
         setShow(!show);
         setShowButtonAddTask(false);
+        console.log(tasksData);
     }
 
     return (
@@ -246,11 +247,10 @@ const CardKanban = (props: Props) => {
                                 </ListGroupItem>
                                 <ListGroupItem className="border-0">
                                     <h4><FaComments /> Comments</h4>
-                                    {task.comments?.map((comment) => {
+                                    {task.comments?.map((comment, index) => {
                                         return (
-                                            <div key={comment.uid}>
-                                                <h6><strong>{comment.uid}</strong></h6>
-                                                <p><small>{comment.text}</small></p>
+                                            <div key={index}>
+                                                <p><small>{comment}</small></p>
                                                 <hr />
                                             </div>
                                         )

@@ -18,7 +18,7 @@ export type postTask = {
   name?: string;
   priority: string;
   description?: string;
-  comments?: comment[];
+  comments?: [];
   status?: string;
   project?: string;
 };
