@@ -44,23 +44,30 @@ export default function Home() {
   }
 
   const PostData = async () => {
-    await addDoc(collection(db, "Projects"), {
-      Task: [],
-      name: name,
-      owner: user?.name,
-    })
-      .then(() =>
-        swal({
-          icon: 'success',
-          title: 'Task created',
-          text: 'Congratulations! Your task has been created.',
-        }))
-      .catch(() =>
-        swal({
-          icon: 'error',
-          title: 'Error',
-          text: 'Error! Please try again.',
-        }));
+    name ?
+      await addDoc(collection(db, "Projects"), {
+        Task: [],
+        name: name,
+        owner: user?.name,
+      })
+        .then(() =>
+          swal({
+            icon: 'success',
+            title: 'Task created',
+            text: 'Congratulations! Your task has been created.',
+          }))
+        .catch(() =>
+          swal({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error! Please try again.',
+          }))
+      :
+      swal({
+        icon: 'warning',
+        title: 'Void name',
+        text: 'Add name to your project.',
+      })
   };
 
   const UpdateTask = () => {
@@ -95,13 +102,13 @@ export default function Home() {
             {!showTasks &&
               <Button onClick={() => UpdateTask()}>See Tasks</Button>
             }
-            {showTasks?
+            {showTasks ?
               dataTasks.length == 0 ? <h2>Don't have any task with Priority 'Do Now'</h2> :
-              dataTasks.map((item, index) => (
-                <div key={index} className="my-3">
-                  <Task NameProjectAndTask={item.project + "/" + item.name} priority={item.priority} />
-                </div>
-              )):
+                dataTasks.map((item, index) => (
+                  <div key={index} className="my-3">
+                    <Task NameProjectAndTask={item.project + "/" + item.name} priority={item.priority} />
+                  </div>
+                )) :
               <span></span>
             }
           </div>}

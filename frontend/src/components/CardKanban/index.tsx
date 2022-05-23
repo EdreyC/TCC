@@ -246,11 +246,11 @@ const CardKanban = (props: Props) => {
                                 </ListGroupItem>
                                 <ListGroupItem className="border-0">
                                     <h4><FaComments /> Comments</h4>
-                                    {task.comments?.map((comments) => {
+                                    {task.comments?.map((comment) => {
                                         return (
-                                            <div key={comments.uid}>
-                                                <h6><strong>{comments.uid}</strong></h6>
-                                                <p><small>{comments.text}</small></p>
+                                            <div key={comment.uid}>
+                                                <h6><strong>{comment.uid}</strong></h6>
+                                                <p><small>{comment.text}</small></p>
                                                 <hr />
                                             </div>
                                         )
