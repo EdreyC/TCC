@@ -47,7 +47,7 @@ const CardKanban = (props: Props) => {
     }
 
     const PostTask = async () => {
-        name ?
+        task.name ?
             await addDoc(collection(db, "Tasks"), {
                 name: task?.name,
                 priority: task?.priority,
@@ -75,7 +75,7 @@ const CardKanban = (props: Props) => {
             swal({
                 icon: 'warning',
                 title: 'Void name',
-                text: 'Add name to your project.',
+                text: 'Add name to your task.',
             })
     }
 
