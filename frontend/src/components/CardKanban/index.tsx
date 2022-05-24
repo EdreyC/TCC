@@ -143,6 +143,7 @@ const CardKanban = (props: Props) => {
             .finally(() => {
                 setComment('');
                 props.reloadTasks();
+                openTask(task.uid);
             });
     }
 
@@ -188,7 +189,6 @@ const CardKanban = (props: Props) => {
         setShowInputDescription(false);
         setShow(!show);
         setShowButtonAddTask(false);
-        console.log(tasksData);
     }
 
     return (
@@ -280,8 +280,10 @@ const CardKanban = (props: Props) => {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer className="justify-content-center" data-color-mode="light">
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Add your comment..."
-                            value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
+                        {!showButtonAddTask &&
+                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Add your comment..."
+                                value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
+                        }
                         {showButtonAddTask &&
                             <Button onClick={(e) => PostTask()}>Adicionar</Button>
                         }

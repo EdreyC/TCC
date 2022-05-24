@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BiHome } from 'react-icons/bi';
 import { HiViewBoards } from 'react-icons/hi';
-import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { query, collection, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import logo from '../../img/Agilie.it.png';
@@ -15,8 +14,7 @@ type Data = {
     owner: string
 }
 
-const SideBar = () => {
-    const [collapsed, setCollapsed] = useState(true);
+const SideBar = ({ ...props }) => {
     const [data, setData] = useState<Data[]>([]);
     const [dataId, setDataId] = useState<String[]>([]);
 
@@ -34,15 +32,12 @@ const SideBar = () => {
     }, [])
 
     return (
-        <ProSidebar collapsed={collapsed} className="fixed-left">
-            <SidebarHeader >
-                {/* {collapsed &&
-                    <MenuItem className='text-center' onClick={(e) => setCollapsed(!collapsed)}><AiOutlineRight /></MenuItem>
-                }
-                {!collapsed &&
-                    <MenuItem className='text-center' onClick={(e) => setCollapsed(!collapsed)}><AiOutlineLeft /></MenuItem>
-                } */}
-                <img src={logo} className='img-fluid px-1' onClick={(e) => setCollapsed(!collapsed)} />
+        <ProSidebar collapsed={props.collapsed} className="fixed-left">
+            <SidebarHeader>
+                <div className='text-center'>
+                    <img src={logo} className='img-fluid px-1' onClick={(e) => props.setCollapsed(!props.collapsed)} />
+                    Agilize.it
+                </div>
             </SidebarHeader>
             <SidebarContent >
                 <Menu iconShape="square">

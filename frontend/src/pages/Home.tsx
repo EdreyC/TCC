@@ -16,6 +16,8 @@ export default function Home() {
   const [dataTasks, setDataTasks] = useState<postTask[]>([]);
   const [dataProjects, setDataProjects] = useState<project[]>([]);
   const [showTasks, setShowTasks] = useState(false);
+  const [prioritys, setPrioritys] = useState(['DoNow', 'High', 'Medium', 'Low']);
+  const [count, setCount] = useState(0);
 
   const getProjects = async () => {
     await getDocs(query(collection(db, "/Projects")))
@@ -30,16 +32,22 @@ export default function Home() {
       })
   }
 
-  const getTasks = async () => {
-    await getDocs(query(collection(db, "/Tasks"), where('priority', '==', 'DoNow')))
+  const getTasks = async (priority: string = 'DoNow') => {
+    await getDocs(query(collection(db, "/Tasks"), where('priority', '==', priority)))
       .then((tasksData) => {
-        let tasks = tasksData.docs.map((task) => {
-          let taskData: any = task?.data();
-          taskData.uid = task?.id;
-          return taskData;
-        });
-        setDataTasks(tasks);
-        return tasks;
+        if (tasksData.docs.length > 0) {
+          let tasks = tasksData.docs.map((task) => {
+            let taskData: any = task?.data();
+            taskData.uid = task?.id;
+            return taskData;
+          });
+          setDataTasks(tasks);
+          return tasks;
+        }
+        else {
+          setCount(count + 1);
+          getTasks(prioritys[count + 1]);
+        }
       })
   }
 

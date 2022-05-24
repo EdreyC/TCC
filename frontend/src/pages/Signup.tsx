@@ -5,6 +5,7 @@ import Button from '../components/Button'
 import { BiLock, BiUser } from 'react-icons/bi'
 import { MdOutlineMail } from 'react-icons/md'
 import { Col, Container, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const [pass, setPass] = useState(false);
@@ -16,7 +17,7 @@ const Signup = () => {
   const auth = getAuth();
 
   async function EmailPasswordSignup() {
-    
+
     if (!auth.currentUser) {
       if (email == "" || password == "") {
         document.getElementById("email")?.focus()
@@ -30,7 +31,7 @@ const Signup = () => {
       else {
         await createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
-            
+
             console.log(userCredential.user)
             const user = userCredential.user;
             // ...
@@ -40,10 +41,10 @@ const Signup = () => {
             const errorMessage = error.message;
             console.log(errorCode)
             console.log(errorMessage)
-            if(errorCode === "auth/weak-password"){
+            if (errorCode === "auth/weak-password") {
               alert("Senha fraca, mínimo 6 caracteres")
             }
-            else if(errorCode==="auth/invalid-email"){
+            else if (errorCode === "auth/invalid-email") {
               alert("Email inválido")
             }
             // ..
@@ -79,8 +80,11 @@ const Signup = () => {
               <BiLock size={22} color='#363636' />
               <input id='confirmPassword' type={pass ? "text" : 'password'} placeholder='Confirm your password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
             </div>
-            <div className='wrapper-signinbuttons d-flex'>
+            <div className='my-2 wrapper-signinbuttons d-flex'>
               <Button onClick={() => EmailPasswordSignup()}>Sign Up</Button>
+            </div>
+            <div className='my-2 wrapper-signinbuttons d-flex'>
+              <Link to="/signin">Voltar</Link>
             </div>
           </div>
         </Col>

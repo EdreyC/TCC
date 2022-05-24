@@ -1,7 +1,7 @@
 const theme = {
     DoNow: {
         background: "#DF2B4B",
-        title: "Do Now",
+        title: "DoNow",
         color: "#FFFFFF"
     },
     High: {
