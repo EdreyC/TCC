@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { where } from 'firebase/firestore';
+import { Droppable } from 'react-drag-and-drop'
+
 
 export default function Board() {
     const params: any = useParams();
@@ -69,10 +71,10 @@ export default function Board() {
         <Container fluid className="mt-5">
             <h1 className="text-center mb-5">{project}</h1>
             <div className="row justify-content-center">
-                <CardKanban title="To do" reloadTasks={getTasks} tasks={tasksToDo} project={params.id} />
-                <CardKanban title="Doing" reloadTasks={getTasks} tasks={tasksDoing} project={params.id} />
-                <CardKanban title="Review" reloadTasks={getTasks} tasks={tasksReview} project={params.id} />
-                <CardKanban title="Done" reloadTasks={getTasks} tasks={tasksDone} project={params.id} />
+                <Droppable><CardKanban title="To do" reloadTasks={getTasks} tasks={tasksToDo} project={params.id} /></Droppable>
+                <Droppable><CardKanban title="Doing" reloadTasks={getTasks} tasks={tasksDoing} project={params.id} /></Droppable>
+                <Droppable><CardKanban title="Review" reloadTasks={getTasks} tasks={tasksReview} project={params.id} /></Droppable>
+                <Droppable><CardKanban title="Done" reloadTasks={getTasks} tasks={tasksDone} project={params.id} /></Droppable>
             </div>
         </Container>
     )
