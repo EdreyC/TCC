@@ -37,11 +37,14 @@ export default function MainRoutes() {
             </div>
           </div>
           :
-          <Link to="/signin"><h1 className="text-center">Voltar para o login</h1></Link>
+          <Link to="/signin"><h1 className="text-center">Back to login</h1></Link>
       } />
       <Route path="/signin" element={<Signin />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="*" element={<span>Route dont found 404</span>} />
+      <Route path="*" element={<div className="text-center mt-5">
+        <h1>Route don't found 404</h1>
+        <Link to='/'>Back to Home</Link>
+      </div>} />
     </Routes>
   )
 }

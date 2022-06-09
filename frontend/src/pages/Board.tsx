@@ -66,7 +66,7 @@ export default function Board() {
     }, [params])
 
     return (
-        <Container fluid className="mt-5">
+        <Container fluid className="mt-3">
             <h1 className="text-center mb-5">{project}</h1>
             <div className="row justify-content-center">
                 <CardKanban title="To do" reloadTasks={getTasks} tasks={tasksToDo} project={params.id} />

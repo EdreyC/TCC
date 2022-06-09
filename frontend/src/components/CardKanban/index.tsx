@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Container, ListGroup, ListGroupItem, Modal } from "react-bootstrap";
 import { AiOutlinePlus } from "react-icons/ai";
-import { BsTextLeft } from "react-icons/bs";
+import { BsTextLeft, BsArrowLeftRight } from "react-icons/bs";
 import { FaComments } from "react-icons/fa";
 import { postTask } from "../../models/Task";
-// import Button from "../Button";
 import Priority from "../Priority";
 import { db } from "../../services/firebase";
 import swal from "sweetalert";
@@ -47,7 +46,7 @@ const CardKanban = (props: Props) => {
     }
 
     const PostTask = async () => {
-        task.name ?
+        task?.name ?
             await addDoc(collection(db, "Tasks"), {
                 name: task?.name,
                 priority: task?.priority,
@@ -207,7 +206,7 @@ const CardKanban = (props: Props) => {
                 </Card.Footer>
             </Card>
             {task &&
-                <Modal show={show} onHide={() => setShow(false)} centered>
+                <Modal show={show} onHide={() => setShow(false)} centered onExited={(e) => showButtonAddTask ? PostTask() : UpdateTask()}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                             {showInputTitle &&
@@ -223,8 +222,9 @@ const CardKanban = (props: Props) => {
                             }
                             {!showInputTitle &&
                                 <h2 className='text-center align-middle' >
-                                    <strong onClick={(e) => handleName()}>{task.name}</strong>
+                                    <strong className='mx-2' onClick={(e) => handleName()}>{task.name}</strong>
                                     <Priority priority={task.priority} onClick={() => handlePriority(task.priority)} />
+                                    <BsArrowLeftRight style={{fontSize: 14, cursor: 'pointer' }} onClick={() => handlePriority(task.priority)} />
                                 </h2>
                             }
                             <select className="form-select" value={props.title} onChange={(e) => setTask({
@@ -284,16 +284,16 @@ const CardKanban = (props: Props) => {
                             <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Add your comment..."
                                 value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
                         }
-                        {showButtonAddTask &&
+                        {/* {showButtonAddTask &&
                             <Button onClick={(e) => PostTask()}>Adicionar</Button>
-                        }
+                        } */}
                         {!showButtonAddTask &&
                             <>
                                 <Button onClick={(e) => CommentTask()}>Comentar</Button>
-                                <Button onClick={(e) => UpdateTask()}>Atualizar</Button>
+                                {/* <Button onClick={(e) => UpdateTask()}>Atualizar</Button> */}
+                                <Button variant="danger" onClick={(e) => confirmRemove()}>Remover</Button>
                             </>
                         }
-                        <Button variant="danger" onClick={(e) => confirmRemove()}>Remover</Button>
                     </Modal.Footer>
                 </Modal>
             }

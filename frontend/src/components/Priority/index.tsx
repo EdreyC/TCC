@@ -1,3 +1,5 @@
+import { BsArrowLeftRight } from "react-icons/bs";
+
 const theme = {
     DoNow: {
         background: "#DF2B4B",
@@ -28,7 +30,7 @@ type Props = {
 
 const Priority = (props: Props) => {
     return (
-        <span {...props} className="rounded px-2 py-1 my-auto mx-3 align-middle" style={{backgroundColor: theme[props.priority].background, fontSize: '12px', color: theme[props.priority].color, cursor: 'pointer'}}>
+        <span {...props} className="rounded px-2 py-1 my-auto mx-1 align-middle" style={{ backgroundColor: theme[props.priority].background, fontSize: '12px', colostylesr: theme[props.priority].color, cursor: 'pointer' }}>
             {theme[props.priority].title}
         </span>
     )

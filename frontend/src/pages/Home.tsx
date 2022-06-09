@@ -98,7 +98,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="d-flex mx-auto justify-content-center flex-column align-items-center mt-5">
+    <div className="d-flex mx-auto justify-content-center flex-column align-items-center mt-3">
       <div className="d-flex p-2 border border-2  border-secondary rounded ">
         <input value={name} onChange={e => setName(e.target.value)} type="text" className="border-0 " placeholder="Create a new project" />
         <Button onClick={() => PostData()} radius="0.5rem" padding="3px"><BsPlus color="white" size={25} /></Button>
